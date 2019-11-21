@@ -1,4 +1,4 @@
-function esc -d 'Ruby cgi HTML escape'
+function eschtml -d 'Ruby cgi HTML escape'
 	set -l options "c/copy"
 	set -l copy 0
 	set -l output ""

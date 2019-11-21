@@ -1,4 +1,4 @@
-function esc -d 'Ruby shellwords escape'
+function shellesc -d 'Ruby shellwords escape'
 	set -l options "c/copy"
 	set -l copy 0
 	set -l output ""

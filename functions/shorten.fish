@@ -1,4 +1,4 @@
-function shorten
+function shorten -d "Truncate every line of input to specified width"
 	set -l options "l/left" "h/help" "e/ellipsis=?"
 	set -l ellipsis ""
 	argparse $options -- $argv

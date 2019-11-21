@@ -1,4 +1,4 @@
-function lsz -d 'ls archives'
+function lsz -d 'ls for inside of compressed archives'
 	set -l pager (__best_pager)
 	if test (count $argv) -ne 1
 		echo "lsz filename.[tar,tgz,gz,zip,etc]"

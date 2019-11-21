@@ -1,4 +1,4 @@
-function rulem -d 'Print a horizontal rule' -a msg char
+function rulem -d 'Print a horizontal rule with message' -a msg char
 	set char (fallback $char "-")
 	set msg (string replace -a " " "@" $msg)
 	set -l cols (tput cols)

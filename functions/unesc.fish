@@ -1,4 +1,4 @@
-function esc -d 'Ruby cgi unescape'
+function unesc -d 'Ruby cgi unescape'
 	set -l options "c/copy"
 	set -l copy 0
 	set -l output ""

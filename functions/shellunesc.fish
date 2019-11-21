@@ -1,4 +1,4 @@
-function esc -d 'Ruby shellwords unescape'
+function shellunesc -d 'Ruby shellwords unescape'
 	set -l options "c/copy"
 	set -l copy 0
 	set -l output ""

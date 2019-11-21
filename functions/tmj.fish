@@ -1,4 +1,3 @@
-# Defined in - @ line 1
-function tmj --description 'alias tmj=tm jekyll'
+function tmj -d 'For use with my tmux utility (bash_scripts/tm)'
 	tm jekyll
 end
