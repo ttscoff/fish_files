@@ -54,7 +54,7 @@ __functions__: the motherload. All of my favorite commands (and some experimenta
 - `eschtml`: Ruby cgi HTML escape
 - `extract`: unarchive any file type
 - `f`: Open directory in Finder
-- `fish_prompt`: Write out the prompt; do not replace this. Instead, change fish_prompt before sourcing .iterm2_shell_integration.fish, or modify iterm2_fish_prompt instead.
+- `fish_prompt`: My custom version of Bira: Bira's weird cousin.
 - `fisher`: fish package manager
 - `fix`: Fix up last command with search/replace
 - `flush`: Flush DNS cache
