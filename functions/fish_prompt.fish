@@ -113,9 +113,10 @@ function fish_right_prompt
 		echo (set_color red) ↵ $st (set_color normal)
 	end
 	__ssh_host
-	if test "$CMD_DURATION" -gt 1000
+	if test "$CMD_DURATION" -gt 3000
 		set_color -o 888
-		echo $CMD_DURATION | __human_time
+		set -l duration (echo -n $CMD_DURATION | __human_time)
+		printf ' (%s)' $duration
 	end
 	set_color -o 666
 	date '+ %T'
