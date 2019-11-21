@@ -3,7 +3,6 @@ set -x R_AUTO_TIMEOUT 5
 set -x R_DEBUG false
 set -x R_QUIET false
 set -x GOPATH ~/gocode
-set -x HOMEBREW_GITHUB_API_TOKEN 'f0a0b735b9213bf06bfa1023fbb8aac281ff9e23'
 
 # Set my editor and git editor
 # set -x EDITOR "/usr/local/bin/subl -w"
