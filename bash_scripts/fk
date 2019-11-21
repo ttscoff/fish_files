@@ -1,0 +1,109 @@
+#!/bin/bash
+
+# helper to create greedy regular expression from multiple arguments
+__regex_from_args() {
+	local fuzzy=$1; shift
+	if [[ $fuzzy == "+f" ]]; then
+		printf '.*%s' $(echo "$*"|sed -E 's/(.)/\1.*/g');
+	else
+		echo "$*"|sed -E 's/ /.*/g';
+	fi
+}
+
+# [12-25-2014] make grep regex
+#find and list processes matching a case-insensitive partial-match string
+fp () {
+	ps Ao pid,comm|awk '{match($0,/[^\/]+$/); print substr($0,RSTART,RLENGTH)": "$1}'|grep -iE "$1"|grep -v grep
+}
+
+# Helper for FindKill to handle the murder
+# @arg 1 "nice" (bool) try `quit` before `kill`
+# @arg 2 "process:pid" (string) process name
+__fk_killer() {
+	local pid
+
+	if [[ $1 == "+n" ]]; then
+		echo "Politely asking ${2%%:*} to go"
+		# osascript -e "tell application \"${2%%:*}\" to quit"
+		/usr/local/bin/quit ${2%%:*}
+		# sleep 4
+		if [[ -n $(ps Ao pid|grep -E "^\s*${2##* }$") ]]; then
+			printf "%s is still running, force quit? (Y/n): " ${2%%:*}; read ANSWER
+			if [[ $ANSWER =~ [nNqQ] ]]; then
+				return
+			else
+				__fk_killer -n "$2"
+			fi
+		else
+			echo "All good."
+		fi
+	else
+		echo "Assasinating ${2%%:*}. Stone cold."
+		pid=${2##* }
+		kill $pid
+		sleep 2
+		if [[ -n $(ps Ao pid|grep -E "^\s*${pid}$") ]]; then
+			echo "This process just won't die... getting mean."
+			kill -9 $pid
+		else
+			echo "All good."
+		fi
+	fi
+}
+
+# [12-30-2014] refactoring
+# 	- added fuzzy search toggle
+# 	- quit script stopped working, swapped to osascript
+#
+# [12-25-2014] add -a option for non-interactive kill when only one result
+# [12-25-2014] change -f to -m (mean) Default to kill kill kill
+# FindKill
+# Find running processes matching (case-insensitive, partial) parameters
+# joined as $1.*$..., and build a menu to kill process
+# @param -n ("nice" switch) Be nice and try to "quit" app first
+# @param -a ("auto" switch) Kill without interaction if there's only one result
+fk () {
+	local helpstring="Search running processes and kill\n\n     -f  fuzzy match\n     -a  auto-kill if only one match\n   -m     be mean if necessary\n\nUsage: fk [-fam] fragment"
+	local patt cmd results
+	local fuzzy="-f"
+	local auto="-a"
+	local nice="+n"
+
+	OPTIND=1
+	while getopts ":anfh" opt; do
+		case $opt in
+			f) fuzzy="+f" ;;
+			a) auto="+a" ;;
+			m) nice="-n" ;;
+			h) echo -e $helpstring; return;;
+			\?) echo "Invalid option: -$opt" >&2; return 1;;
+		esac
+	done
+	shift $((OPTIND-1))
+
+
+	if [[ -z $1 ]]; then
+		echo "No pattern found in arguments, use -h for help"; return
+	fi
+	patt=$(__regex_from_args $fuzzy "$*")
+	IFS=$'\n'
+	declare -a results=( $(fp "$patt") )
+	if [[ ${#results[@]} == 0 ]]; then
+		echo "No processes found"
+	elif [[ $auto == "+a" && ${#results[@]} == 1 ]]; then
+		__fk_killer $nice "${results[0]}"
+	else
+		PS3='Kill which process? (q to cancel): '
+
+		select OPT in ${results[@]}; do
+			if [[ $OPT =~ [0-9]$ ]]; then
+				cmd=$(ps -p ${OPT##* } -o command|tail -n 1)
+				__fk_killer $nice "$OPT"
+			fi
+			break
+		done
+	fi
+	unset IFS
+}
+
+fk $@

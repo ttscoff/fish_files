@@ -1,0 +1,126 @@
+#!/bin/bash
+
+# Open filetype
+# Finds every file in folder whose extension starts with the first parameter passed
+# if more than one file of given type is found, it offers a menu
+
+oft ()
+{
+    local target fnd app all result;
+    target=".";
+    fnd='';
+    result='';
+    if [[ $# == 0 ]]; then
+        echo -n "Enter an ext or partial ext: ";
+        read ext;
+    else
+        [[ "$1" =~ -[h\?] ]] && echo "Usage: oft [-a \"app name\"] [path (fragments)] file extension (fragment)" && return;
+        while [[ $# -gt 1 ]]; do
+            if [[ "$1" == "-a" ]]; then
+                app="$2";
+                shift;
+                shift;
+            else
+                if [[ "$1" == "-all" ]]; then
+                    all=true;
+                    shift;
+                else
+                    fnd+="$1 ";
+                    shift;
+                fi;
+            fi;
+        done;
+        ext=$1;
+    fi;
+    if [[ $fnd != '' && -n !all ]]; then
+        if [[ -d "${fnd%% *}" ]]; then
+            cd "${fnd%% *}" >> /dev/null;
+            target="`pwd`";
+            cd - >> /dev/null;
+        else
+            target=$(/usr/bin/env ruby <<SCRIPTTIME
+      if (File.exists?(File.expand_path('~/.oftlist')))
+        query = "$fnd".strip
+        input = File.open(File.expand_path('~/.oftlist'),'r').read
+        re = query.gsub(/\s+/,' ').split(" ").join('.*?')
+        res = input.scan(/.*?#{re}.*?$/i)
+        unless res.nil? || res.empty?
+          out = res.uniq.sort[0]
+          exit if out =~ /^\s*$/
+          print out
+        end
+      end
+SCRIPTTIME
+);
+            if [[ "$target" =~ ^\s*$ ]]; then
+                echo "No match found for directory: $fnd";
+                return;
+            fi;
+        fi;
+    fi;
+    CHKFILES=$(ls -C1 "$target/*.*$ext*" 2> /dev/null | wc -l);
+    if [ $CHKFILES -ne 0 ]; then
+        echo "No files matching \"$ext\" found.";
+        return;
+    fi;
+    if [[ -n $all ]]; then
+        [[ $target == "." ]] && target="`pwd`";
+        echo "${target%/}" >> ~/.oftlist;
+        sort -u ~/.oftlist -o ~/.oftlist;
+        if [[ -n $app ]]; then
+            $(/usr/bin/open -a "$app" $target/*\.*$ext*);
+        else
+            $(/usr/bin/open $target/*\.*$ext*);
+        fi;
+        return;
+    fi;
+    declare -a fileList=($target/*\.*$ext*);
+    if [[ ${#fileList[*]} -gt 1 ]]; then
+        if [[ -n `which fzf` ]]; then
+            result=$(printf '%s\n' ${fileList[@]}|fzf);
+            if [ $result != "" ]; then
+                [[ $target == "." ]] && target="`pwd`";
+                echo "${target%/}" >> ~/.oftlist;
+                sort -u ~/.oftlist -o ~/.oftlist;
+                if [[ -n $app ]]; then
+                    $(/usr/bin/open -a "$app" "$result");
+                else
+                    $(/usr/bin/open "$result");
+                fi;
+            fi;
+        else
+            IFS='
+';
+            if [[ -n $app ]]; then
+                PS3="Open which file in $app? ";
+            else
+                PS3='Open which file? ';
+            fi;
+            select OPT in "Cancel" ${fileList[*]};
+            do
+                if [ $OPT != "Cancel" ]; then
+                    [[ $target == "." ]] && target="`pwd`";
+                    echo "${target%/}" >> ~/.oftlist;
+                    sort -u ~/.oftlist -o ~/.oftlist;
+                    if [[ -n $app ]]; then
+                        $(/usr/bin/open -a "$app" "$OPT");
+                    else
+                        $(/usr/bin/open "$OPT");
+                    fi;
+                fi;
+                unset IFS;
+                break;
+            done;
+        fi;
+    else
+        echo "${target%/}" >> ~/.oftlist;
+        sort -u ~/.oftlist -o ~/.oftlist;
+        if [[ -n $app ]]; then
+            $(/usr/bin/open -a "$app" "${fileList[0]}");
+        else
+            $(/usr/bin/open "${fileList[0]}");
+        fi;
+    fi
+}
+
+oft $@

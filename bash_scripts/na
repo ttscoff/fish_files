@@ -1,0 +1,4 @@
+#!/bin/bash
+
+source ~/.bash_it/plugins/enabled/brett.plugin.bash
+na $@

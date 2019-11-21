@@ -1,0 +1,5 @@
+#!/bin/bash
+
+. ~/.bash_it/custom/misc.bash
+
+geticonpng $@

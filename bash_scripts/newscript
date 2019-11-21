@@ -1,0 +1,5 @@
+#!/bin/bash
+
+source /Users/ttscoff/.bash_it/custom/misc.bash
+
+newscript $@
