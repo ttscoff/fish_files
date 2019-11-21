@@ -1,4 +1,5 @@
 function r -d "Run Reiki via bash"
-	/bin/bash ~/scripts/fish/r.bash $argv
+	# assumes r.bash (in the bash_scripts folder) is in your path
+	/bin/bash r.bash $argv
 end
 
