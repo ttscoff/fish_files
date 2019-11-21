@@ -22,7 +22,7 @@ set -x NA_AUTO_LIST_FOR_DIR 1
 set -x NA_AUTO_LIST_IS_RECURSIVE 0
 
 unset PYTHONPATH
-source ~/.config/fish/custom/custom.fish
+source ~/.config/fish/custom.fish
 rvm default
 
 source ~/.iterm2_shell_integration.fish

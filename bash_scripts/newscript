@@ -1,5 +1,61 @@
 #!/bin/bash
 
-source /Users/ttscoff/.bash_it/custom/misc.bash
+# Touch, make executable and start editing a new script
+# $ newscript my_new_script.sh
+# edit default shebangs within the function
+# include additional skeleton files as [extension].txt
+# in the $defaults_txt folder defined in config
+newscript() {
+	# Config
+	# where your scripts are stored
+	local scriptdir=/Users/ttscoff/scripts/
+	# if no extension is provided, default to
+	local default_ext=rb
+	# optional, where skeleton scripts (e.g. rb.txt) are stored
+	local defaults_txt=~/.newscript_defaults/
+	# End config
+	local filename="${scriptdir%/}/$1"
+
+	if [[ $# == 0 ]]; then # no argument, display help and exit
+		echo -e "newscript: touch, make executable and \
+start editing a new script.\n\033[31;1mError:\033[37;1m Missing filename\033[0m\n\n\
+Usage: mynewscript SCRIPT_NAME.ext\n"
+		return 1
+	fi
+	# get the extension from the filename
+	ext=${filename#*.}
+	# if there's no extenstion, add default
+	if [[ $ext == $filename ]]; then
+		ext=$default_ext
+		filename=$filename.$ext
+	fi
+	# if no script with this name already exists
+	if [ ! -f $filename ]; then
+
+		# create a file for the given extension with appropriate shebang
+		case $ext in
+			rb ) echo -e "#!/usr/bin/env ruby" >> $filename;;
+			py ) echo -e "#!/usr/bin/env python" >> $filename;;
+			pl ) echo -e "#!/usr/bin/env perl" >> $filename;;
+			sh | bash ) echo -e "#!/bin/bash" >> $filename;;
+			zsh | bash ) echo -e "#!/bin/zbash" >> $filename;;
+			 * ) touch $filename;; # any other extension create blank file
+		esac
+		# if skeleton files directory and a txt for the given extension exist
+		if [[ -d ${defaults_txt%/} && -f ${defaults_txt%/}/$ext.txt ]]; then
+			# concatenate it to the file
+			\cat ${defaults_txt%/}/$ext.txt >> $filename
+		fi
+		# Add trailing newline to the new script
+		echo -ne "\n" >> $filename
+		# Make it executable
+		chmod a+x "$filename"
+		echo -e "\033[32;1m$filename\033[0m"
+	else # Specified filename already exists
+		echo -e "\033[31;1mFile exists: $filename\033[0m"
+	fi
+	# Edit the script
+	$EDITOR "$filename"
+}
 
 newscript $@

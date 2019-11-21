@@ -1,3 +1,5 @@
+#!/usr/local/bin/fish
+
 function describe_functions -d "Create a list of all functions and their descriptions"
 	set -l output ""
 	for file in functions/*.fish
@@ -9,3 +11,5 @@ function describe_functions -d "Create a list of all functions and their descrip
 
 	printf '%s\n' $output | sort
 end
+
+describe_functions

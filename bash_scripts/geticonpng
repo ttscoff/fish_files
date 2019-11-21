@@ -1,5 +1,47 @@
 #!/bin/bash
 
-. ~/.bash_it/custom/misc.bash
+# get any app's full-size icon, PNG version
+function geticonpng() {
+	# Autocompletes app names with modified .app_completions scripts
+	APP=`echo $1|sed -e 's/\.app$//'`
+	APPDIR=''
+	for dir in "/Applications/" "/Applications/Setapp/" "/Applications/Utilities/" "/Users/ttscoff/Applications/" "/Developer/Applications/" "/Developer/Applications/Utilties/"; do
+		if [[ -d "${dir}$APP.app" ]]; then
+			APPDIR="$dir"
+			break
+		elif [[ -d "${dir}${APP}.localized/$APP.app" ]]; then
+			APPDIR="${dir}$APP.localized/"
+			break
+		fi
+	done
+	if [[ $APPDIR == '' ]]; then
+		echo "App not found"
+	else
+		ICON=`defaults read "${APPDIR}$APP.app/Contents/Info" CFBundleIconFile|sed -e 's/\.icns$//'`
+		TMPFILE="${TMPDIR}${APP}_icon.png"
+		OUTFILE="$HOME/Desktop/${APP}_icon.png"
+		MAXAVAIL=`sips -g pixelWidth "${APPDIR}$APP.app/Contents/Resources/$ICON.icns"|tail -1|awk '{print $2}'`
+		echo -n "Enter max pixel width ($MAXAVAIL): "
+		read MAX
+		if [[ $MAX == '' || $MAX -gt $MAXAVAIL ]]; then
+			MAX=$MAXAVAIL
+		fi
+		/usr/bin/sips -s format png --resampleHeightWidthMax $MAX "${APPDIR}$APP.app/Contents/Resources/$ICON.icns" --out "$OUTFILE" > /dev/null 2>&1
+		# /usr/local/bin/jpegtran -optimize "$TMPFILE" > "$OUTFILE"
+		echo "Wrote PNG to $OUTFILE."
+		echo -n 'Open in Acorn? (y/N): '
+		read ANSWER
+		if [[ $ANSWER == 'y' ]]; then
+			open -a "Acorn.app" "$OUTFILE"
+		else
+			echo -n 'Copy to clipboard? (y/N): '
+			read ANSWER
+			if [[ $ANSWER == 'y' ]]; then
+				/usr/local/bin/impbcopy "$OUTFILE"
+				echo "Image in clipboard"
+			fi
+		fi
+	fi
+}
 
 geticonpng $@

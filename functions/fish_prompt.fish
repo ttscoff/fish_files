@@ -68,8 +68,15 @@ function __git_status
 end
 
 function __ruby_version
+	# Show versions only for Ruby-specific folders
+	if not test -f Gemfile \
+		-o -f Rakefile \
+		-o (count *.rb) -gt 0
+		return
+	end
+
 	if type "rvm-prompt" > /dev/null 2>&1
-		set ruby_version (rvm-prompt v g)
+		set ruby_version (rvm-prompt i v g)
 	else if type "rbenv" > /dev/null 2>&1
 		set ruby_version (rbenv version-name)
 	else
@@ -106,6 +113,10 @@ function fish_right_prompt
 		echo (set_color red) ↵ $st (set_color normal)
 	end
 	__ssh_host
+	if test "$CMD_DURATION" -gt 1000
+		set_color -o 888
+		echo $CMD_DURATION | __human_time
+	end
 	set_color -o 666
 	date '+ %T'
 	set_color normal

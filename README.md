@@ -2,21 +2,24 @@
 
 A collection of configuration files and functions for the Fish shell. These would be installed in `~/.config/fish/`, though I don't recommend overwriting your current setup wholesale. Pick and choose, use this repo as examples for your own exploration.
 
-## The parts
+## The folders
 
-__bash_scripts__: some utilities that were too much trouble to port from Bash and work just as well run with hashbangs. They just need to be in the $PATH.
+- __bash_scripts__: some utilities that were too much trouble to port from Bash and work just as well run with hashbangs. They just need to be in the $PATH (some commands reference my local path, `~/scripts/fish`, which will need updating).
 
-__completions__: various completion configurations for custom commands.
+- __completions__: various completion configurations for custom commands.
 
-__custom__: some files I source at login (from `config.fish`), mostly shared functions I prefer to have in memory (as opposed to autoloaded), and some aliases I just haven't gotten around to turning into autoloaded functions yet.
+- __custom__: some files I source at login (from `config.fish`), mostly shared functions I think I need to have in memory (as opposed to autoloaded), and some aliases that don't make great functions.
 
-__functions__: the motherload. All of my favorite commands (and some experimental ones). Most have a description on the function declaration, so you can see it in source or by running the `describe` command that you'll find in this folder (which essentially runs `functions -Dv`, but prettier).
+- __functions__: the motherload. All of my favorite commands (and some experimental ones). Most have a description on the function declaration, so you can see it in source or by running the `describe` command that you'll find in this folder (which essentially runs `functions -Dv`, but prettier).
 
 ## All the functions
 
 - `64enc`: encode a given image file as base64 and output css background property to clipboard
 - `64font`: encode a given font file as base64 and output css background property to clipboard
 - `__auto_dir`: if command fails see if it\'s a directory or local executable
+- `__best_pager`: Choose the best available pager (opinionated)
+- `__exec_available`: test if command is available
+- `__human_time`: Humanize a time interval for display
 - `__prev_token`: Get the previous token on the command line
 - `__re_extension`: remove extension from word under/before cursor
 - `__regex_from_args`: Helper to create greedy regular expression from multiple arguments
@@ -32,8 +35,10 @@ __functions__: the motherload. All of my favorite commands (and some experimenta
 - `bid`: Get bundle id for app name
 - `bld`: Run howzit build system
 - `browser`: Write output to a temp HTML file and open in default browser
+- `c`: clear screen alias
 - `calc`: CLI calculator
 - `cat`: Use bat instead of cat unless it\'s a Markdown file, then use mdless
+- `cbp`: ClipBoard Preview
 - `cdd`: Choose cd dir from menu (fzf)
 - `cdt`: Change dir based on TagFiler tags
 - `chrome`: Open Google Chrome with optional file (completion available)
@@ -50,11 +55,12 @@ __functions__: the motherload. All of my favorite commands (and some experimenta
 - `dman`: Open man page in Dash
 - `docx2mmd`: Convert docx to markdown: docx2md [source] [target]
 - `er`: edit recent file using fasd and fzf
-- `esc`: Ruby cgi unescape
+- `esc`: Ruby cgi escape
 - `eschtml`: Ruby cgi HTML escape
 - `extract`: unarchive any file type
 - `f`: Open directory in Finder
-- `fish_prompt`: My custom version of Bira: Bira's weird cousin.
+- `fallback`: allow a fallback value for variable
+- `fish_prompt`: n/a
 - `fisher`: fish package manager
 - `fix`: Fix up last command with search/replace
 - `flush`: Flush DNS cache
@@ -62,9 +68,12 @@ __functions__: the motherload. All of my favorite commands (and some experimenta
 - `ft`: A shortcut for mdfinding tagged items system-wide
 - `fuck`: Correct your previous console command
 - `gc`: git commit -am
+- `get_ext`: Get the file extension from the argument
 - `getignore`: Get ignore file from gitignore.io and save to .gitignore
 - `getignores`: Pull gitignore.io list of available .gitignore files
 - `gg`: Commit pending changes and quote all args as message
+- `gist`: gist is defunkt, use jist
+- `gistp`: private gist
 - `gitar`: Automatically add new and remove deleted files from the git index
 - `gmine`: Resolve git conflicts with mine
 - `gsearch`: Grep git commit history
@@ -90,6 +99,8 @@ __functions__: the motherload. All of my favorite commands (and some experimenta
 - `nope`: echo "nope"
 - `o`: Shortcut to open an app from the command line
 - `optim`: Open ImageOptim with optional file (completion available)
+- `pbgist`: public gist from clipboard
+- `pbgistp`: private gist from clipboard
 - `percentof`: Quick calculation for sale discounts
 - `percentoff`: Quick calculation for sale discounts
 - `pless`: cat a file with pygments highlighting
@@ -107,6 +118,7 @@ __functions__: the motherload. All of my favorite commands (and some experimenta
 - `shorten`: Truncate every line of input to specified width
 - `spell`: Get spelling options from aspell
 - `spellf`: Get spelling options from aspell
+- `src`: reload config file
 - `sublp`: Open a Sublime Text project (completion available)
 - `sum`: Take a list of numbers and return the sum
 - `td`: [Create and] open project todo
