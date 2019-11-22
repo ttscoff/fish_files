@@ -40,6 +40,7 @@ A collection of configuration files and functions for the Fish shell. These woul
 - `cat`: Use bat instead of cat unless it\'s a Markdown file, then use mdless
 - `cbp`: ClipBoard Preview
 - `cdd`: Choose cd dir from menu (fzf)
+- `cdr`: cd to a recently visited directory
 - `cdt`: Change dir based on TagFiler tags
 - `chrome`: Open Google Chrome with optional file (completion available)
 - `cl`: copy output of last command to clipboard
@@ -60,7 +61,7 @@ A collection of configuration files and functions for the Fish shell. These woul
 - `extract`: unarchive any file type
 - `f`: Open directory in Finder
 - `fallback`: allow a fallback value for variable
-- `fish_prompt`: n/a
+- `fish_prompt`: "Bira\'s weird cousin" prompt
 - `fisher`: fish package manager
 - `fix`: Fix up last command with search/replace
 - `flush`: Flush DNS cache
