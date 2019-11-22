@@ -10,7 +10,7 @@ A collection of configuration files and functions for the Fish shell. These woul
 
 - __custom__: some files I source at login (from `config.fish`), mostly shared functions I think I need to have in memory (as opposed to autoloaded), and some aliases that don't make great functions.
 
-- __functions__: the motherload. All of my favorite commands (and some experimental ones). Most have a description on the function declaration, so you can see it in source or by running the `describe` command that you'll find in this folder (which essentially runs `functions -Dv`, but prettier).
+- __functions__: the mother lode. All of my favorite commands (and some experimental ones). Most have a description on the function declaration, so you can see it in source or by running the `describe` command that you'll find in this folder (which essentially runs `functions -Dv`, but prettier).
 
 ## All the functions
 
