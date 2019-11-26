@@ -9,8 +9,8 @@ function __nag
 end
 
 function __pushnotify
-	set -l token nkfqTQbzJdPcAhdqcq58Ee6RQTNQq7
-	set -l key o2WU1702cqrw9vLcNClzdR7eJ268g7
+	set -l token xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+	set -l key xxxxxxxxxxxxxxxxxxxxxxxxxxxx
 	set -l formdata "token=$token&user=$key&title="(urlenc $argv[1])"&message="(urlenc $argv[2])"&priority=1&sound=spacealarm"
 	curl -X POST -d $formdata 'https://api.pushover.net/1/messages.json'
 end
