@@ -35,10 +35,18 @@ end
 function __current_path
 	# Replace HOME with ~ (or 🏠)
 	set -l path (string replace "$HOME" (set_color brmagenta)"~"(set_color ccc) (pwd))
+
+	# see if we're in a git project, highlight in path
+	set repo (git rev-parse --show-toplevel 2>/dev/null)
+	if not test "$repo" = ""
+		set repo (string replace "$HOME" "" $repo)
+		set path (string replace "$repo" (set_color yellow)"$repo"(set_color ccc) $path)
+	end
+
 	# Highlight last path element
-	set -l parts (string split "/" $path)
-	set parts[-1] (set_color normal)(set_color brwhite)$parts[-1](set_color normal)
-	set path (string join "/" $parts)
+# set -l parts (string split "/" $path)
+# set parts[-1] (set_color normal)(set_color brwhite)$parts[-1](set_color normal)
+# set path (string join "/" $parts)
 
 	echo -n " "$path(set_color normal)
 end
@@ -75,18 +83,25 @@ function __ruby_version
 		return
 	end
 
-	if type "rvm-prompt" > /dev/null 2>&1
-		set ruby_version (rvm-prompt i v g)
-	else if type "rbenv" > /dev/null 2>&1
-		set ruby_version (rbenv version-name)
-	else
-		set ruby_version "system"
-	end
+	set -l __rvm_default_ruby (grep GEM_HOME $rvm_path/environments/default 2>/dev/null | sed -e"s/'//g" | sed -e's/.*\///')
+	set -l __rvm_current_ruby_i (rvm-prompt i)
+	set -l __rvm_current_ruby_v (rvm-prompt v g)
+	set -l __rvm_current_ruby
 
-	echo -n (set_color red) "<$ruby_version>"(set_color normal)
+	# Add * if default
+	if test "$__rvm_default_ruby" = "$__rvm_current_ruby_i-$__rvm_current_ruby_v"
+		set __rvm_current_ruby_v "*$__rvm_current_ruby_v"
+	end
+	# Only show interpreter if it's not 'ruby'
+	if not test "$__rvm_current_ruby_i" = "ruby"
+	   set __rvm_current_ruby "$__rvm_current_ruby_i-$__rvm_current_ruby_v"
+	else
+		set __rvm_current_ruby "$__rvm_current_ruby_v"
+	end
+	echo -n (set_color red) "<$__rvm_current_ruby>"(set_color normal)
 end
 
-function fish_prompt
+function fish_prompt -d '"Bira\'s weird cousin" prompt'
 	set -l st $status
 	set -l pchar (set_color --bold white)"❯"
 	if [ $st != 0 ];
