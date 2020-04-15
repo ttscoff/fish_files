@@ -1,3 +1,4 @@
 function md -d 'Test if current directory is bookmarked'
-	marks | grep --color=never (pwd) | colout '(\w+)\s+(->)\s+(.*)' green,blue,white
+	set_color brgreen && marks | grep --color=never (realpath .) | awk '{print $1}'
+	set_color normal
 end
