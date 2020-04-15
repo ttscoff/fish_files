@@ -1,1 +1,1 @@
-complete -xc alpha -d "Image" -a "*.{png,gif}"
+complete -fkc alpha -a '(__complete_extension "png gif")'

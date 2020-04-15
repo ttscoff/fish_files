@@ -1,1 +1,1 @@
-complete -xc optim -d "Image" -a "*.{png,jpg,jpeg,gif}"
+complete -fkc optim -a '(__complete_extension "png jpg jpeg gif")'

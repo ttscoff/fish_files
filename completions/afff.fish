@@ -1,2 +1,1 @@
-complete -xc afff -d "Image" -a "*.{png,jpg,jpeg}"
-complete -xc afff -d "Affinity Photo" -a "*.{afphoto,psd}"
+complete -fkc afff -a '(__complete_extension "png jpg jpeg afphoto psd")'

@@ -1,1 +1,1 @@
-complete -xc chrome -d "HTML File" -a "*.{html,htm}"
+complete -fkc chrome -a '(__complete_extension "html htm")'

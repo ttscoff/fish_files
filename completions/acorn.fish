@@ -1,2 +1,1 @@
-complete -xc acorn -d "Image" -a "*.{png,jpg,jpeg,psd}"
-complete -xc acorn -d "Acorn" -a "*.acorn"
+complete -fkc acorn -a '(__complete_extension "jpg jpeg gif png acorn")'

@@ -1,2 +1,1 @@
-complete -xc affd -d "Illustration" -a "*.{ai,eps}"
-complete -xc affd -d "Affinity Designer" -a "*.{afdesign}"
+complete -fkc affd -a '(__complete_extension "ai eps afdesign")'

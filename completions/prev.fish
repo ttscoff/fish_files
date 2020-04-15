@@ -1,2 +1,1 @@
-complete -xc prev -d "Image" -a "*.{png,gif,jpeg,jpg}"
-complete -xc prev -d "PDF" -a "*.pdf"
+complete -fkc prev -a '(__complete_extension "png gif jpeg jpg pdf")'

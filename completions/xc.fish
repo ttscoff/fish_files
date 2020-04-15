@@ -1,1 +1,1 @@
-complete -xc xc -d "Xcode project" -a "*.xcodeproj"
+complete -fkc xc -a '(__complete_extension "xcodeproj")'

@@ -1,1 +1,1 @@
-complete -xc tp -d "TaskPaper File" -a "*.taskpaper"
+complete -fkc tp -a '(__complete_extension "taskpaper md")'

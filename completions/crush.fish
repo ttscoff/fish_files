@@ -1,1 +1,1 @@
-complete -xc crush -d "PNG" -a "*.png"
+complete -fkc crush -a '(__complete_extension "png")'

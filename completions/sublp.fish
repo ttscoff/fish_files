@@ -1,1 +1,1 @@
-complete -xc sublp -d "Sublime project" -a "*.sublime-project"
+complete -fkc sublp -a '(__complete_extension "sublime-project")'
