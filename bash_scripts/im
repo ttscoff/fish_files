@@ -1,0 +1,35 @@
+#!/bin/bash
+
+im() {
+	local verb=$1
+
+	shift
+	# special handling for `im thinking ...`
+	if [[ $verb == "thinking" ]]; then
+		# trim `im thinking about ...`
+		[[ $1 == "about" ]] && shift
+		# Add to Ideas with @idea tag
+		doing done -s Ideas "$* @idea"
+	# Special handling for `im coding ...`
+	elif [[ $verb == coding ]]; then
+		# Add to Projects with @coding tag
+		doing now -s Projects "$* @coding"
+	# Any other "ing" gets the verb tagged
+	elif [[ $verb =~ ing$ ]]; then
+		doing now "@$verb $*"
+	# `im done ...` or `im finished ...`
+	elif [[ $verb =~ (done|finished) ]]; then
+		# If the first word after done is a present-tense
+		# verb, tag it
+		if [[ $1 =~ ing$ ]]; then
+			doing done "@$*"
+		else
+			doing done "$*"
+		fi
+	# Fine, be boring
+	else
+		doing now "$*"
+	fi
+}
+
+im $@
