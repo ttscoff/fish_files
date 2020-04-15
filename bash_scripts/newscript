@@ -8,7 +8,7 @@
 newscript() {
 	# Config
 	# where your scripts are stored
-	local scriptdir=/Users/ttscoff/scripts/
+	local scriptdir=~/scripts/
 	# if no extension is provided, default to
 	local default_ext=rb
 	# optional, where skeleton scripts (e.g. rb.txt) are stored
