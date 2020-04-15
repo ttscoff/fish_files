@@ -14,12 +14,17 @@ A collection of configuration files and functions for the Fish shell. These woul
 
 ## All the functions
 
+
 - `64enc`: encode a given image file as base64 and output css background property to clipboard
 - `64font`: encode a given font file as base64 and output css background property to clipboard
+- `64svg`: encode a given svg file as base64 and output css background-image property to clipboard
 - `__auto_dir`: if command fails see if it\'s a directory or local executable
 - `__best_pager`: Choose the best available pager (opinionated)
+- `__complete_extension`: Used by improved completion functions
 - `__exec_available`: test if command is available
 - `__human_time`: Humanize a time interval for display
+- `__is_text`: Test if a file is plain text
+- `__ls_text_files`: List all text files in current directory
 - `__prev_token`: Get the previous token on the command line
 - `__re_extension`: remove extension from word under/before cursor
 - `__regex_from_args`: Helper to create greedy regular expression from multiple arguments
@@ -32,9 +37,11 @@ A collection of configuration files and functions for the Fish shell. These woul
 - `alpha`: Open ImageAlpha with optional file (completion available)
 - `ax`: Make file executable
 - `bak`: move file to .bak version
+- `be`: bundle exec alias
 - `bid`: Get bundle id for app name
 - `bld`: Run howzit build system
 - `browser`: Write output to a temp HTML file and open in default browser
+- `bunches`: Edit Bunches in Sublime
 - `c`: clear screen alias
 - `calc`: CLI calculator
 - `cat`: Use bat instead of cat unless it\'s a Markdown file, then use mdless
@@ -47,7 +54,9 @@ A collection of configuration files and functions for the Fish shell. These woul
 - `clip`: Copy file to clipboard
 - `code`: Open VSCode with optional file
 - `cpwd`: Copy the current directory path to the clipboard
+- `cr`: Open CodeRunner
 - `crush`: pngcrush
+- `dadjoke`: Get a dad joke from icanhazdadjoke.com
 - `dash`: Open argument in Dash
 - `ddg`: search duckduckgo
 - `degit`: Remove all traces of git from a folder
@@ -55,6 +64,7 @@ A collection of configuration files and functions for the Fish shell. These woul
 - `dirfor`: get origin directory for running process
 - `dman`: Open man page in Dash
 - `docx2mmd`: Convert docx to markdown: docx2md [source] [target]
+- `eds`: Shortcut for editscript
 - `er`: edit recent file using fasd and fzf
 - `esc`: Ruby cgi escape
 - `eschtml`: Ruby cgi HTML escape
@@ -81,6 +91,7 @@ A collection of configuration files and functions for the Fish shell. These woul
 - `gt`: jump to top level of git repo
 - `gtheirs`: Resolve git conflicts with theirs
 - `hs`: Search, select, and exec from history
+- `idea`: Record an idea with doing
 - `imdown`: Test for internet connection and notify when it comes up
 - `imgsize`: Quickly get image dimensions from the command line
 - `ip`: Get external IP address
@@ -95,6 +106,7 @@ A collection of configuration files and functions for the Fish shell. These woul
 - `lt`: List directory from oldest to newest
 - `ltr`: List directory from newest to oldest
 - `mack`: ack for markdown
+- `md`: Test if current directory is bookmarked
 - `mkdir`: mkdir with subdirs, option to cd after creating
 - `mmdc`: Open MultiMarkdown Composer with optional file (completion available)
 - `nope`: echo "nope"
@@ -135,5 +147,6 @@ A collection of configuration files and functions for the Fish shell. These woul
 - `yep`: echo "yep"
 - `yn`: Simple pass/fail test for given command
 - `zipup`: exports a clean copy of the current git repo (master) to a zip file
+
 
 I'll update these every once in a while. If you're digging through and spot a problem, a stupid mistake, or something that could just plain be done better, please add an issue and let me know!
