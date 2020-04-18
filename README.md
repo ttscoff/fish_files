@@ -6,11 +6,13 @@ A collection of configuration files and functions for the Fish shell. These woul
 
 - __bash_scripts__: some utilities that were too much trouble to port from Bash and work just as well run with hashbangs. They just need to be in the $PATH (some commands reference my local path, `~/scripts/fish`, which will need updating).
 
-- __completions__: various completion configurations for custom commands.
+- __completions__: various completion configurations for custom commands. 
 
 - __custom__: some files I source at login (from `config.fish`), mostly shared functions I think I need to have in memory (as opposed to autoloaded), and some aliases that don't make great functions.
 
 - __functions__: the mother lode. All of my favorite commands (and some experimental ones). Most have a description on the function declaration, so you can see it in source or by running the `describe` command that you'll find in this folder (which essentially runs `functions -Dv`, but prettier).
+
+__COMPLETIONS NOTE:__ for the file extension completion function to work, it needs to be able to find the `filecomplete.rb` script located in the `bash_scripts` directory. Edit `functions/__complete_extension.fish` to point to that file on your system.
 
 ## All the functions
 
