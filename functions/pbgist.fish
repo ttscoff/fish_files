@@ -1,3 +1,3 @@
-function pbgist -d 'public gist from clipboard'
-	jist -pcP $argv
+function pbgist --description 'private gist from clipboard'
+	gist --paste --private --copy
 end
