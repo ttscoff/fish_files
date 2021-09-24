@@ -6,7 +6,7 @@ function td -d '[Create and] open project todo'
 
 	if test (count $todos) -gt 0
 		if test (count $argv) -gt 0
-			set todofile (ls *.taskpaper|fzf -q $argv -1)
+			set todofile (ls *.taskpaper|fzf -q $argv -1 -0)
 		else
 			set todofile (ls *.taskpaper|fzf -1)
 		end

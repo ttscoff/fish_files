@@ -16,6 +16,7 @@ __COMPLETIONS NOTE:__ for the file extension completion function to work, it nee
 
 ## All the functions
 
+
 - `64enc`: encode a given image file as base64 and output css background property to clipboard
 - `64font`: encode a given font file as base64 and output css background property to clipboard
 - `64svg`: encode a given svg file as base64 and output css background-image property to clipboard
@@ -23,13 +24,13 @@ __COMPLETIONS NOTE:__ for the file extension completion function to work, it nee
 - `__best_pager`: Choose the best available pager (opinionated)
 - `__complete_extension`: n/a
 - `__exec_available`: test if command is available
+- `__f_dir_regex`: n/a
 - `__human_time`: Humanize a time interval for display
 - `__is_text`: Test if a file is plain text
 - `__ls_text_files`: List all text files in current directory
 - `__prev_token`: Get the previous token on the command line
 - `__re_extension`: remove extension from word under/before cursor
 - `__regex_from_args`: Helper to create greedy regular expression from multiple arguments
-- `__should_na`: n/a
 - `ack`: ack defaults, ~/.ackrc for more
 - `acorn`: Open Acorn.app with optional file(completion available)
 - `add_user_path`: Shortcut to add a user path
@@ -42,9 +43,10 @@ __COMPLETIONS NOTE:__ for the file extension completion function to work, it nee
 - `be`: n/a
 - `bid`: Get bundle id for app name
 - `bld`: Run howzit build system
+- `box`: Draw a box around text.
 - `browser`: Write output to a temp HTML file and open in default browser
 - `bunches`: Edit Bunches in Sublime
-- `c`: alias c clear
+- `c`: n/a
 - `calc`: CLI calculator
 - `cat`: Use bat instead of cat unless it\'s a Markdown file, then use mdless
 - `cbp`: n/a
@@ -76,14 +78,18 @@ __COMPLETIONS NOTE:__ for the file extension completion function to work, it nee
 - `f`: Open directory in Finder with jump shortcuts
 - `fallback`: allow a fallback value for variable
 - `farch`: Test Architecture of Framework
+- `fasdfzf`: Helper function to return a file via fasd and fzf
 - `ffdir`: fuzzy find a directory, pass root dir and sequential search strings
+- `fffile`: fuzzy find a file, pass root dir and sequential search strings
 - `ffmark`: fuzzy find a jump mark
+- `filetype`: Returns the kMDItemContentTypeTree for a file
 - `findgist`: select gist from list and display contents
 - `findgistid`: select gist from list and display contents
 - `fire`: Open Firefox with optional file (completion available)
 - `fish_prompt`: "Bira\'s weird cousin" prompt
 - `fix`: Fix up last command with search/replace
 - `flush`: Flush DNS cache
+- `fo`: Open file using jump shortcuts and fuzzy matching
 - `fp`: Find and list processes matching a case-insensitive fuzzy-match string
 - `ft`: A shortcut for mdfinding tagged items system-wide
 - `fuck`: Correct your previous console command
@@ -97,6 +103,7 @@ __COMPLETIONS NOTE:__ for the file extension completion function to work, it nee
 - `getignores`: Pull gitignore.io list of available .gitignore files
 - `gg`: Commit pending changes and quote all args as message
 - `gitar`: Automatically add new and remove deleted files from the git index
+- `gitrelease`: Create a git release
 - `gmine`: Resolve git conflicts with mine
 - `gsearch`: Grep git commit history
 - `gt`: jump to top level of git repo
@@ -109,13 +116,14 @@ __COMPLETIONS NOTE:__ for the file extension completion function to work, it nee
 - `imgsize`: Quickly get image dimensions from the command line
 - `ip`: Get external IP address
 - `ips`: Display all ip addresses for this host
+- `is`: test if given file is of a file type. is TYPE FILE
 - `istext`: test if given file is plain text
 - `js`: lint with jslint
 - `jump_fasd`: n/a
 - `jump`: Fish "jump" replacement with subdirectory matching
 - `lb`: Select file in LaunchBar, fall back to the current directory
 - `lbash`: launch bash login shell
-- `lld`: alias lld ls -ld
+- `lld`: n/a
 - `lno`: Print file with line numbers
 - `lsgrep`: Wildcard folder/file search
 - `lsregister`: n/a
@@ -163,16 +171,17 @@ __COMPLETIONS NOTE:__ for the file extension completion function to work, it nee
 - `tower`: Open Tower for directory (default CWD)
 - `tp`: Open TaskPaper with optional file (completion available)
 - `unbak`: remove bak extension
+- `uncolor`: Remove color codes from string
 - `unesc`: Ruby cgi unescape
 - `up`: cd to a parent folder with fuzzy matching
 - `urlenc`: url encode the passed string
+- `v`: vim via fasd and fzf
 - `warn`: Echo to STDERR
 - `watchthis`: Watch for changes in the current directory and execute command
 - `xc`: Open Xcode with optional file (completion available)
 - `yep`: echo "yep"
 - `yn`: Simple pass/fail test for given command
+- `z`: Custom fasd cd with fzf
 - `zipup`: exports a clean copy of the current git repo (master) to a zip file
-
-
 
 I'll update these every once in a while. If you're digging through and spot a problem, a stupid mistake, or something that could just plain be done better, please add an issue and let me know!
