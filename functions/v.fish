@@ -1,3 +1,6 @@
 function v -d 'vim via fasd and fzf'
-	vim (fasdfzf -f $argv)
+	set -l tgt (fasdfzf -f $argv)
+  if [ (echo $tgt) ]
+    vim "$tgt"
+  end
 end
