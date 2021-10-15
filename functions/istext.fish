@@ -1,8 +1,10 @@
-function istext -d 'test if given file is plain text'
-	# if test (file $argv |grep -ci text) -ne 0
-	# 	return 0
-	# else
-	# 	return 1
-	# end
-	return (is text $argv)
+function istext --description 'test if given file is plain text'
+
+	if is text "$argv"
+		echo "yep" >&2
+		return 0
+	else
+		echo "nope" >&2
+		return 1
+	end
 end

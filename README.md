@@ -17,6 +17,7 @@ __COMPLETIONS NOTE:__ for the file extension completion function to work, it nee
 ## All the functions
 
 
+
 - `64enc`: encode a given image file as base64 and output css background property to clipboard
 - `64font`: encode a given font file as base64 and output css background property to clipboard
 - `64svg`: encode a given svg file as base64 and output css background-image property to clipboard
@@ -31,6 +32,7 @@ __COMPLETIONS NOTE:__ for the file extension completion function to work, it nee
 - `__prev_token`: Get the previous token on the command line
 - `__re_extension`: remove extension from word under/before cursor
 - `__regex_from_args`: Helper to create greedy regular expression from multiple arguments
+- `__unfuck_previous_command`: n/a
 - `ack`: ack defaults, ~/.ackrc for more
 - `acorn`: Open Acorn.app with optional file(completion available)
 - `add_user_path`: Shortcut to add a user path
@@ -39,6 +41,7 @@ __COMPLETIONS NOTE:__ for the file extension completion function to work, it nee
 - `ag`: Silver Surfer defaults, smart case, ignore VCS
 - `alpha`: Open ImageAlpha with optional file (completion available)
 - `ax`: Make file executable
+- `badge`: Set iTerm session badge
 - `bak`: move file to .bak version
 - `be`: n/a
 - `bid`: Get bundle id for app name
@@ -50,6 +53,7 @@ __COMPLETIONS NOTE:__ for the file extension completion function to work, it nee
 - `calc`: CLI calculator
 - `cat`: Use bat instead of cat unless it\'s a Markdown file, then use mdless
 - `cbp`: n/a
+- `cdb`: Open broot with folders only
 - `cdd`: Choose cd dir from menu (fzf)
 - `cdr`: cd to a recently visited directory
 - `cdt`: Change dir based on TagFiler tags
@@ -174,6 +178,7 @@ __COMPLETIONS NOTE:__ for the file extension completion function to work, it nee
 - `uncolor`: Remove color codes from string
 - `unesc`: Ruby cgi unescape
 - `up`: cd to a parent folder with fuzzy matching
+- `updown`: cd to a directory and then fuzzy search its tree
 - `urlenc`: url encode the passed string
 - `v`: vim via fasd and fzf
 - `warn`: Echo to STDERR

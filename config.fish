@@ -20,6 +20,14 @@ set -x NA_DONE_TAG "@done"
 set -x NA_MAX_DEPTH 2
 set -x NA_AUTO_LIST_FOR_DIR 1
 set -x NA_AUTO_LIST_IS_RECURSIVE 0
+# quickquestion
+set -xg QQ_NOTES_DIR "/Users/ttscoff/Library/Mobile Documents/9CR7T2DMDG~com~ngocluu~onewriter/Documents/nvALT2.2"
+set -xg QQ_NOTES_EXT "md"
+set -xg QQ_NOTES_PRE "??"
+set -xg QQ_EDITOR "vim"
+# dontforget
+set -xg DF_LAUNCHBAR true
+set -xg DF_SPEAK false
 
 unset PYTHONPATH
 source ~/.config/fish/custom.fish
