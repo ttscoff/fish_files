@@ -7,7 +7,7 @@ function prioritize -d 'set a numeric prefix on a file for sorting'
 	set -l dir (dirname $argv[1])
 	set -l oldname (basename $argv[1])
 	set -l newname (string replace -r '^\d-' '' $oldname)
-	if test $argv[2] != "0"
+	if test "$argv[2]" != "0"
 		set newname "$argv[2]-$newname"
 	end
 	mv "$dir/$oldname" "$dir/$newname"

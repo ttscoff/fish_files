@@ -38,14 +38,24 @@
 # letters, matching becomes case sensitive. Use -i to force
 # case insensitive, or -c to force case sensitive.
 function jump -d 'Fish "jump" replacement with subdirectory matching'
-	set -l options "I/case-sensitive" "i/case-insensitive" "h/help" "v/verbose" "c/command="
+	set -l options "I/case-sensitive" "i/case-insensitive" "h/help" "v/verbose" "c/command=" "nomenu" "multi"
 	set -l case_sensitive
 	set -l cmd
 	set -l verbose
+	set -l use_fzf ' -m'
+	set -l multi ''
 
 	argparse $options -- $argv
 
-	if set -q _flag_help
+	if set -q _flag_nomenu
+		set use_fzf ''
+	end
+
+	if set -q _flag_multi
+		set multi ' --multi'
+	end
+
+	if set -q _flag_help || test (count $argv) -eq 0
 		echo "Fuzzy jump with subdirectory matching"
 		echo
 		echo "Usage: jump [MARK] [sub directory search]"
@@ -69,9 +79,9 @@ function jump -d 'Fish "jump" replacement with subdirectory matching'
 	end
 
 	if set -q _flag_I
-		set case_sensitive "-c"
+		set case_sensitive " -c"
 	else if set -q _flag_i
-		set case_sensitive "-i"
+		set case_sensitive " -i"
 	end
 
 	if set -q _flag_c
@@ -94,8 +104,8 @@ function jump -d 'Fish "jump" replacement with subdirectory matching'
 	set -l new_path
 
 	# if first arg is '.', search from current directory
-	if test $argv[1] = '.'
-		set new_path (ffdir $case_sensitive . $argv)
+	if test "$argv[1]" = '.'
+		set new_path (ffdir $use_fzf$multi$case_sensitive . $argv)
 		if test -n "$new_path" -a -d "$new_path"
 
 			eval $cmd \"$new_path\"
@@ -109,7 +119,7 @@ function jump -d 'Fish "jump" replacement with subdirectory matching'
 		# we have more than one argument, search for subdirs
 		if test (count $argv) -gt 1
 			set args $argv[2..-1]
-			set new_path (ffdir $case_sensitive $new_path $args)
+			set new_path (ffdir $use_fzf$multi$case_sensitive $new_path $args)
 		end
 		# if test -n verbose
 		# 	eval $verbose $cmd \"$new_path\"
@@ -125,7 +135,7 @@ function jump -d 'Fish "jump" replacement with subdirectory matching'
 			if test (count $argv) -gt 1
 				# set args (string split / (string join "" $argv[2..-1]))
 				set args $argv[2..-1]
-				set new_path (ffdir $case_sensitive $new_path $args)
+				set new_path (ffdir $use_fzf$multi$case_sensitive $new_path $args)
 			end
 
 			eval $cmd \"$new_path\"
@@ -133,7 +143,7 @@ function jump -d 'Fish "jump" replacement with subdirectory matching'
 		else if test -d $argv[1]
 			set new_path "$argv[1]"
 			if test (count $argv) -gt 1
-				set new_path (ffdir $case_sensitive $new_path $argv[2..-1])
+				set new_path (ffdir $use_fzf$multi$case_sensitive $new_path $argv[2..-1])
 			end
 
 			eval $cmd \"$new_path\"

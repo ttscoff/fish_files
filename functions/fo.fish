@@ -123,7 +123,7 @@ function fo -d "Open file using jump shortcuts and fuzzy matching"
 	if test (count $argv) -eq 0
 		$executable$finder_app "."
 	# if first arg is '.', search from current directory
-	else if test $argv[1] = '.'
+	else if test "$argv[1]" = '.'
 		set new_path (fffile $case_sensitive . $argv)
 		if test -n "$new_path" -a -f "$new_path"
 			$executable$finder_app "$new_path"

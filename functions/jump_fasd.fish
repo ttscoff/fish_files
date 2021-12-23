@@ -94,7 +94,7 @@ function jump -d 'Fish "jump" replacement with subdirectory matching'
 	set -l new_path
 
 	# if first arg is '.', search from current directory
-	if test $argv[1] = '.'
+	if test "$argv[1]" = '.'
 		set new_path (ffdir $case_sensitive . $argv)
 		if test -n "$new_path" -a -d "$new_path"
 

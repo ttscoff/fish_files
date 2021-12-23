@@ -1,9 +1,19 @@
 function warn -d "Echo to STDERR"
-	set -l options 'e/error' 'w/warn' 'i/info'
+	set -l options 'e/error' 'w/warn' 'i/info' 'h/help'
+
 	set -l error 0
 	set -l color (set_color normal)
 
 	argparse $options -- $argv
+
+	if set -q _flag_help
+		echo "Output to STDERR"
+		echo "Options:"
+		echo "  -e, --error   Error level message"
+		echo "  -w, --warn    Warning level message"
+		echo "  -i, --info    Info level message"
+		return
+	end
 
 	if set -q _flag_error
 		set color (set_color -b brred brwhite)

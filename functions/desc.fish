@@ -10,7 +10,7 @@ function desc --description 'Print the description of a Fish function.'
 	end
 
 	# Do we want to print *all* descriptions?
-	if test $argv = '--all'
+	if test "$argv" = '--all'
 		for f in (functions | sed -E 's/(.*), /\1\n/g')
 			desc $f;
 		end;

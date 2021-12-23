@@ -105,7 +105,7 @@ function f -d "Open directory in Finder with jump shortcuts"
 	if test (count $argv) -eq 0
 		open $finder_app "."
 	# if first arg is '.', search from current directory
-	else if test $argv[1] = '.'
+	else if test "$argv[1]" = '.'
 		set new_path (ffdir $case_sensitive . $argv)
 		if test -n "$new_path" -a -d "$new_path"
 			open $finder_app "$new_path"

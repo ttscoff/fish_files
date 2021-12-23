@@ -1,5 +1,5 @@
 function fffile -d "fuzzy find a file, pass root dir and sequential search strings"
-	set -l options "c/case-sensitive" "i/case-insensitive"
+	set -l options "c/case-sensitive" "i/case-insensitive" "m/menu" "multi" "d/depth="
 	argparse $options -- $argv
 
 	set -l max_depth 2
@@ -11,6 +11,10 @@ function fffile -d "fuzzy find a file, pass root dir and sequential search strin
 	else
 		set new_path '.'
 		set args $argv
+	end
+
+	if set -q _flag_depth
+		set max_depth $_flag_depth
 	end
 
 	if test (count $args) -gt 0
@@ -27,18 +31,49 @@ function fffile -d "fuzzy find a file, pass root dir and sequential search strin
 		set -l regex (__f_dir_regex $args)
 		# start by looking for directories starting with first char of search
 		# string, ignoring dot directories
-		set -l results (find -E -s "$new_path" -$case_sensitive ".*/[^.]*$regex.*" -type f -maxdepth $max_depth -mindepth 1)
-		# choose shortest result
-		set found (shortest $results)
+		set -l results (find -E -s "$new_path" -$case_sensitive ".*/[^.]*$regex.*" -type f -maxdepth $max_depth -mindepth 1 2> /dev/null)
+
+		if set -q _flag_menu
+			set found (echo -e (string join "\n" $results) | fzf -1 -0)
+			if test -z "$found"
+				return
+			end
+		else
+			if set -q _flag_multi
+				set found $results
+			else
+				# choose shortest result
+				set found (shortest $results)
+			end
+		end
 
 		# if we found a result, clean it up
 		if test -n "$found"
+			if set -q _flag_multi
+				echo -e (string join "\n" $found)
+				return
+			end
 			set found (echo "$found" | sed -e 's/^\.\///')
 			set new_path $found
 		else # if not, try again without the first char/dot requirement
-			set results (find -E -s "$new_path" -$case_sensitive ".*$regex.*" -type f -maxdepth $max_depth -mindepth 1)
-			set found (shortest $results)
+			set results (find -E -s "$new_path" -$case_sensitive ".*$regex.*" -type f -maxdepth $max_depth -mindepth 1 2> /dev/null)
+			if set -q _flag_menu
+				set found (echo -e (string join "\n" $results) | fzf -1 -0)
+				if test -z "$found"
+					return
+				end
+			else
+				if set -q _flag_multi
+					set found $results
+				else
+					set found (shortest $results)
+				end
+			end
 			if test -n "$found"
+				if set -q _flag_multi
+					echo -e (string join "\n" $found)
+					return
+				end
 				set found (echo "$found" | sed -e 's/^\.\///')
 				set new_path $found
 			end

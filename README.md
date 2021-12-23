@@ -17,7 +17,6 @@ __COMPLETIONS NOTE:__ for the file extension completion function to work, it nee
 ## All the functions
 
 
-
 - `64enc`: encode a given image file as base64 and output css background property to clipboard
 - `64font`: encode a given font file as base64 and output css background property to clipboard
 - `64svg`: encode a given svg file as base64 and output css background-image property to clipboard
@@ -25,6 +24,7 @@ __COMPLETIONS NOTE:__ for the file extension completion function to work, it nee
 - `__best_pager`: Choose the best available pager (opinionated)
 - `__complete_extension`: n/a
 - `__exec_available`: test if command is available
+- `__expand_path`: commandline function to expand str/str using fasd and fzf
 - `__f_dir_regex`: n/a
 - `__human_time`: Humanize a time interval for display
 - `__is_text`: Test if a file is plain text
@@ -33,6 +33,9 @@ __COMPLETIONS NOTE:__ for the file extension completion function to work, it nee
 - `__re_extension`: remove extension from word under/before cursor
 - `__regex_from_args`: Helper to create greedy regular expression from multiple arguments
 - `__unfuck_previous_command`: n/a
+- `_tide_item_message`: n/a
+- `_tide_item_ssh_badge`: n/a
+- `abbrs`: Search abbreviations
 - `ack`: ack defaults, ~/.ackrc for more
 - `acorn`: Open Acorn.app with optional file(completion available)
 - `add_user_path`: Shortcut to add a user path
@@ -62,6 +65,7 @@ __COMPLETIONS NOTE:__ for the file extension completion function to work, it nee
 - `clip`: Copy file to clipboard
 - `code`: n/a
 - `copy`: n/a
+- `corner_print`: n/a
 - `cpwd`: Copy the current directory path to the clipboard
 - `cr`: Open CodeRunner
 - `crush`: pngcrush
@@ -90,7 +94,7 @@ __COMPLETIONS NOTE:__ for the file extension completion function to work, it nee
 - `findgist`: select gist from list and display contents
 - `findgistid`: select gist from list and display contents
 - `fire`: Open Firefox with optional file (completion available)
-- `fish_prompt`: "Bira\'s weird cousin" prompt
+- `fish_prompt`: n/a
 - `fix`: Fix up last command with search/replace
 - `flush`: Flush DNS cache
 - `fo`: Open file using jump shortcuts and fuzzy matching
@@ -98,7 +102,7 @@ __COMPLETIONS NOTE:__ for the file extension completion function to work, it nee
 - `ft`: A shortcut for mdfinding tagged items system-wide
 - `fuck`: Correct your previous console command
 - `g2`: Fish "jump" replacement with fuzzy subdirectory matching
-- `gc`: git commit -am
+- `gc`: n/a
 - `geminfo`: Get info for a gem with partial name matching
 - `geminstall`: install a gem with fuzzy search
 - `gemuninstall`: Uninstall a gem with partial name matching
@@ -114,6 +118,7 @@ __COMPLETIONS NOTE:__ for the file extension completion function to work, it nee
 - `gtheirs`: Resolve git conflicts with theirs
 - `hook`: n/a
 - `hooks`: Return a list of files hooked to target (Hook.app)
+- `howlong`: alias howlong=echo $CMD_DURATION
 - `hs`: Search, select, and exec from history
 - `idea`: Record an idea with doing
 - `imdown`: Test for internet connection and notify when it comes up
@@ -146,14 +151,18 @@ __COMPLETIONS NOTE:__ for the file extension completion function to work, it nee
 - `pbgist`: private gist from clipboard
 - `pbgistp`: private gist from clipboard
 - `pbp`: Pasteboard Preview
+- `pbpmd`: Pasteboard Markdown Preview
 - `percentof`: Quick calculation for sale discounts
 - `percentoff`: Quick calculation for sale discounts
+- `pg`: alias pg=ps -ax | grep -i
 - `pless`: cat a file with pygments highlighting
 - `pman`: Display a man page as a PostScript PDF in Preview.app
 - `prev`: Open Preview with optional file (completion available)
 - `preview`: Preview text files using fzf and bat
 - `prioritize`: set a numeric prefix on a file for sorting
+- `prompt_message`: n/a
 - `r`: Run Reiki via bash
+- `raise`: Like ruby raise, but for fish
 - `rule`: Print a horizontal rule
 - `rulem`: Print a horizontal rule with message
 - `rvm`: n/a

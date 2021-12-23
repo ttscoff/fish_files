@@ -30,3 +30,80 @@ function __should_na --on-variable PWD
 	# function __should_na --on-event fish_prompt
 	test -s (basename $PWD)".taskpaper" && ~/scripts/fish/na
 end
+
+function __by_length
+	set lines (string join "\n" $argv)
+	echo -e $lines | awk '{ print length(), $0 | "sort -n" }' | cut -d" " -f2-
+end
+
+function __sort_by_length
+	cat | awk '{ print length(), $0 | "sort -n" }' | cut -d" " -f2-
+end
+
+function map
+	set fnc $argv[1]
+	set args $argv[2..-1]
+	if test -z "$args"
+		while read item
+			echo (eval $fnc (string escape $item))
+		end
+	else
+		set -l result
+
+		for item in $args
+			set -a result (eval $fnc (string escape $item))
+		end
+
+		echo -en (string join "\n" $result)
+	end
+end
+
+function compress -d 'removes empty elements from an array'
+	set -l result
+	for item in $argv
+		if test -n "$item"
+			set -a result $item
+		end
+	end
+	echo -en (string join "\n" $result)
+end
+
+function trim_pwd -d 'removes the current working directory from an array of paths'
+	set -l wd (pwd)
+	if test (count $argv) -gt 0
+		echo -en $argv | sed -E "s%^($wd|\.)/%%" | sed -E "s%^$wd/?\$%.%"
+	else
+		while read line
+			echo -e $line | sed -E "s%^($wd|\.)/%%" | sed -E "s%^$wd/?\$%.%"
+		end
+	end
+end
+
+function shorten_home -d 'substitutes $HOME with ~'
+	set -l wd $HOME
+	if test (count $argv) -gt 0
+		echo -en $argv | sed -E "s%^$wd%~%"
+	else
+		while read line
+			echo -e $line | sed -E "s%^$wd%~%"
+		end
+	end
+end
+
+function append_slash -d 'append a slash to each line/argument if needed'
+	if test (count $argv) -gt 0
+		echo -en $argv | sed -E 's%/?$%/%'
+	else
+		while read line
+			echo -e $line | sed -E 's%/?$%/%'
+		end
+	end
+end
+
+function slash_if_dir -d 'Add trailing slash if directory'
+	if test -d $argv
+		append_slash $argv
+	else
+		echo -en $argv
+	end
+end
