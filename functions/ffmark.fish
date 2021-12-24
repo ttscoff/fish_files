@@ -1,4 +1,9 @@
 function ffmark -d "fuzzy find a jump mark"
+	if test -e ~/.marks/$argv[1]
+		echo -n (readlink ~/.marks/$argv[1])
+		return 0
+	end
+
 	set -l new_path
 	if test (count $argv) -gt 0
 		set -l args $argv

@@ -1,5 +1,5 @@
 function __f_dir_to_regex
-	echo (printf '%s' (echo "$argv"|sed -E 's/ +//g'|sed -E 's/(.)/\1[^\/]*/g'))
+	printf '%s' "$argv" | sed -E 's%/%%g' | sed -E 's/ +//g' | sed -E 's/(.)/\1[^\/]*/g'
 end
 
 function __f_dir_regex

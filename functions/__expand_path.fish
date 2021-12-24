@@ -65,7 +65,7 @@ function __expand_path -d 'commandline function to expand str/str using fasd and
 	set -l result
 
 	if set -q _flag_nofzf
-		set result (__by_length $res)
+		set result (__sort_by_length $res)
 		set result $result[1]
 	else
 		set result (echo -e (string join "\n" $res) | fzf -1 -0 --height 5)

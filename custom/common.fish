@@ -31,12 +31,12 @@ function __should_na --on-variable PWD
 	test -s (basename $PWD)".taskpaper" && ~/scripts/fish/na
 end
 
-function __by_length
+function __sort_by_length
 	set lines (string join "\n" $argv)
 	echo -e $lines | awk '{ print length(), $0 | "sort -n" }' | cut -d" " -f2-
 end
 
-function __sort_by_length
+function __by_length
 	cat | awk '{ print length(), $0 | "sort -n" }' | cut -d" " -f2-
 end
 

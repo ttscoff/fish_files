@@ -1,8 +1,3 @@
-functions -q __original_cd;
-    or functions -c cd __original_cd
-functions -e cd
-    and functions -c cd_fuzz cd
-
 functions -q __bt_fish_complete_path;
     or functions -c __fish_complete_path __bt_fish_complete_path
 

@@ -32,7 +32,7 @@ function ffdir -d "fuzzy find a directory, pass root dir and sequential search s
 		set -l regex (__f_dir_regex $args)
 		# start by looking for directories starting with first char of search
 		# string, ignoring dot directories
-		set -l results (find -E -s "$new_path" -$case_sensitive ".*/[^.]*$regex.*" -type d -maxdepth $max_depth -mindepth 1)
+		set -l results (find -E -s "$new_path" -$case_sensitive ".*/[^.]*$regex.*" -type d -maxdepth $max_depth -mindepth 1 2> /dev/null)
 		# choose shortest result
 		if set -q _flag_menu
 			set found (echo -e (string join "\n" $results) | fzf -1 -0)
@@ -56,7 +56,7 @@ function ffdir -d "fuzzy find a directory, pass root dir and sequential search s
 			set found (echo "$found" | sed -e 's/^\.\///')
 			set new_path $found
 		else # if not, try again without the first char/dot requirement
-			set results (find -E -s "$new_path" -$case_sensitive ".*$regex.*" -type d -maxdepth $max_depth -mindepth 1)
+			set results (find -E -s "$new_path" -$case_sensitive ".*$regex.*" -type d -maxdepth $max_depth -mindepth 1 2> /dev/null)
 			if set -q _flag_menu
 				set found (echo -e (string join "\n" $results) | fzf -1 -0)
 				if test -z "$found"
