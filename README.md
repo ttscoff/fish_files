@@ -26,6 +26,7 @@ __COMPLETIONS NOTE:__ for the file extension completion function to work, it nee
 - `__exec_available`: test if command is available
 - `__expand_path`: commandline function to expand str/str using fasd and fzf
 - `__f_dir_regex`: n/a
+- `__fuzzy_cd`: fuzzy cd with jump bookmarks
 - `__human_time`: Humanize a time interval for display
 - `__is_text`: Test if a file is plain text
 - `__ls_text_files`: List all text files in current directory
@@ -56,6 +57,7 @@ __COMPLETIONS NOTE:__ for the file extension completion function to work, it nee
 - `calc`: CLI calculator
 - `cat`: Use bat instead of cat unless it\'s a Markdown file, then use mdless
 - `cbp`: n/a
+- `cd_fuzz`: n/a
 - `cdb`: Open broot with folders only
 - `cdd`: Choose cd dir from menu (fzf)
 - `cdr`: cd to a recently visited directory
@@ -71,6 +73,7 @@ __COMPLETIONS NOTE:__ for the file extension completion function to work, it nee
 - `crush`: pngcrush
 - `dadjoke`: Get a dad joke from icanhazdadjoke.com
 - `dash`: Open argument in Dash
+- `days_in`: get the number of days in a given month/year
 - `ddg`: search duckduckgo
 - `degit`: Remove all traces of git from a folder
 - `desc`: Print the description of a Fish function.
@@ -123,6 +126,7 @@ __COMPLETIONS NOTE:__ for the file extension completion function to work, it nee
 - `idea`: Record an idea with doing
 - `imdown`: Test for internet connection and notify when it comes up
 - `imgsize`: Quickly get image dimensions from the command line
+- `index_of`: return the 1-based index of the first argument in remaining arguments
 - `ip`: Get external IP address
 - `ips`: Display all ip addresses for this host
 - `is`: test if given file is of a file type. is TYPE FILE
@@ -197,5 +201,22 @@ __COMPLETIONS NOTE:__ for the file extension completion function to work, it nee
 - `yn`: Simple pass/fail test for given command
 - `z`: Custom fasd cd with fzf
 - `zipup`: exports a clean copy of the current git repo (master) to a zip file
+
+### Utility functions
+
+- `__by_length`: n/a
+- `__ff_dir_regex`: n/a
+- `__ff_dir_to_regex`: n/a
+- `__should_na`: n/a
+- `__sort_by_length`: n/a
+- `append_slash`: append a slash to each line/argument if needed
+- `map`: n/a
+- `remove_empty`: removes empty elements from an array
+- `return_array`: Echo out an array one line at a time
+- `shorten_home`: substitutes $HOME with ~
+- `shortest_common`: n/a
+- `slash_if_dir`: Add trailing slash if directory
+- `trim_pwd`: removes the current working directory from an array of paths
+
 
 I'll update these every once in a while. If you're digging through and spot a problem, a stupid mistake, or something that could just plain be done better, please add an issue and let me know!
