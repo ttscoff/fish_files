@@ -8,22 +8,25 @@ function __auto_dir --on-event fish_command_not_found -d "if command fails see i
 				set -a dirs $i
 			end
 		end
+
 		if test (count $dirs) -gt 1
-			set fmatch (printf "%s\n" $dirs|fzf)
+			set fmatch (printf "%s\n" $dirs|fzf --height=(math (count $dirs) + 1))
 		else if test (count $dirs) -eq 1
 			set fmatch $dirs
 		else
-			return
+			__fish_default_command_not_found_handler $argv
 		end
-		set_color -o green
+
 		if test -d $fmatch
-			echo "cd $fmatch"
+			warn "cd $fmatch"
 			cd "$fmatch"
 		else if test -x $argv[1]
-			echo "execute $argv"
+			warn "execute $argv"
 			eval "./$argv"
 		else
-			echo "Found $fmatch, but I don't know what to do with it."
+			__fish_default_command_not_found_handler $argv
 		end
+
+		return 0
 	end
 end

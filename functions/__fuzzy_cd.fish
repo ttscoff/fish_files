@@ -36,7 +36,7 @@ function __fuzzy_cd -d "fuzzy cd with jump bookmarks"
 				return 0
 			end
 
-			set res (ffdir -i -d2 --multi $base $token)
+			set res (ffdir -i -d2 --multi --shortest $base $token)
 		end
 
 		if test -z "$res" || test (string match '.' $res) || test (string match $base $res)

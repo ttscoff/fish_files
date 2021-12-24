@@ -1,5 +1,5 @@
 function ffdir -d "fuzzy find a directory, pass root dir and sequential search strings"
-	set -l options "c/case-sensitive" "i/case-insensitive" "m/menu" "multi" "d/depth="
+	set -l options "c/case-sensitive" "i/case-insensitive" "m/menu" "multi" "d/depth=" "shortest"
 	argparse $options -- $argv
 
 	set -l max_depth 2
@@ -50,15 +50,21 @@ function ffdir -d "fuzzy find a directory, pass root dir and sequential search s
 		# if we found a result, clean it up
 		if test -n "$found"
 			if set -q _flag_multi
-				echo -e (string join "\n" $found)
+				if set -q _flag_shortest
+					set found (shortest_common $found)
+				end
+				return_array $found
 				return
 			end
-			set found (echo "$found" | sed -e 's/^\.\///')
+			set found (echo -n "$found" | sed -e 's/^\.\///')
 			set new_path $found
 		else # if not, try again without the first char/dot requirement
 			set results (find -E -s "$new_path" -$case_sensitive ".*$regex.*" -type d -maxdepth $max_depth -mindepth 1 2> /dev/null)
+			if set -q _flag_shortest
+				set results (shortest_common $results)
+			end
 			if set -q _flag_menu
-				set found (echo -e (string join "\n" $results) | fzf -1 -0)
+				set found (return_array $results | fzf -1 -0)
 				if test -z "$found"
 					return
 				end

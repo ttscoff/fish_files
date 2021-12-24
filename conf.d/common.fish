@@ -1,15 +1,14 @@
-function __ff_mark_to_regex
-	echo (printf '%s' (echo "$argv"|sed -E 's/ +//g'|sed -E 's/(.)/\1[^\/]*/g'))
-end
-
-function __ff_mark_regex
-	set -l section
-	set -l regex (__ff_mark_to_regex $argv[1])
-	for arg in $argv[2..-1]
-		set section (__ff_mark_to_regex $arg)
-		set regex "$regex/.*$section"
+function shortest_common
+	set -l root $argv[1]
+	set -l results $argv[1]
+	set -e argv[1]
+	for path in (return_array $argv | sort)
+		if not test (string match "$root*" $path)
+			set root $path
+			set -a results $path
+		end
 	end
-	echo $regex
+	return_array $results
 end
 
 function __ff_dir_to_regex
@@ -58,10 +57,10 @@ function map
 	end
 end
 
-function compress -d 'removes empty elements from an array'
+function remove_empty -d 'removes empty elements from an array'
 	set -l result
 	for item in $argv
-		if test -n "$item"
+		if test -n (string replace -a ' ' '' $item)
 			set -a result $item
 		end
 	end
@@ -76,6 +75,12 @@ function trim_pwd -d 'removes the current working directory from an array of pat
 		while read line
 			echo -e $line | sed -E "s%^($wd|\.)/%%" | sed -E "s%^$wd/?\$%.%"
 		end
+	end
+end
+
+function return_array -d 'Echo out an array one line at a time'
+	for item in $argv
+		echo $item
 	end
 end
 
@@ -99,6 +104,7 @@ function append_slash -d 'append a slash to each line/argument if needed'
 		end
 	end
 end
+
 
 function slash_if_dir -d 'Add trailing slash if directory'
 	if test -d $argv
