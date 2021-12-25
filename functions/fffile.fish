@@ -20,6 +20,7 @@ function fffile -d "fuzzy find a file, pass root dir and sequential search strin
 	if test (count $args) -gt 0
 		# allow traversing to number of args * max count
 		set max_depth (math (count $args)" * $max_depth")
+		test $max_depth > 4 && set max_depth 4
 		set -l found "."
 		# if search string contains uppercase, make search case sensitive
 		if string match -q --regex [A-Z] $args or set -q _flag_c
