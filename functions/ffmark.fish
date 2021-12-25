@@ -32,14 +32,14 @@ function ffmark -d "fuzzy find a jump mark"
 		set found (shortest $results)
 
 		if test -n "$found"
-			set found (replace -r '^./' '' $found)
+			set found (string replace -r '^./' '' $found)
 			set new_path $found
 		else
 			set -l results (find -LE -s "$MARKPATH" -iregex "$MARKPATH/.*$regex" -type d -maxdepth 1 | head -n 1 | tr -d "\n")
 			# Get shortest match
 			set found (shortest $results)
 			if test -n "$found"
-				set found (replace -r '^./' '' $found)
+				set found (string replace -r '^./' '' $found)
 				set new_path $found
 			end
 		end
