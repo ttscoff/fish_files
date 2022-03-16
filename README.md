@@ -17,25 +17,28 @@ __COMPLETIONS NOTE:__ for the file extension completion function to work, it nee
 ## All the functions
 
 
+
 - `64enc`: encode a given image file as base64 and output css background property to clipboard
 - `64font`: encode a given font file as base64 and output css background property to clipboard
 - `64svg`: encode a given svg file as base64 and output css background-image property to clipboard
 - `__auto_dir`: if command fails see if it\'s a directory or local executable
 - `__best_pager`: Choose the best available pager (opinionated)
-- `__complete_extension`: n/a
+- `__complete_extension`: 
 - `__exec_available`: test if command is available
 - `__expand_path`: commandline function to expand str/str using fasd and fzf
-- `__f_dir_regex`: n/a
-- `__fuzzy_cd`: fuzzy cd with jump bookmarks
+- `__f_dir_regex`: 
+- `__fuzzy_cd`: n/a
 - `__human_time`: Humanize a time interval for display
 - `__is_text`: Test if a file is plain text
 - `__ls_text_files`: List all text files in current directory
 - `__prev_token`: Get the previous token on the command line
 - `__re_extension`: remove extension from word under/before cursor
 - `__regex_from_args`: Helper to create greedy regular expression from multiple arguments
-- `__unfuck_previous_command`: n/a
-- `_tide_item_message`: n/a
-- `_tide_item_ssh_badge`: n/a
+- `__unfuck_previous_command`: 
+- `_tide_item_doing_active`: 
+- `_tide_item_doing_now`: 
+- `_tide_item_message`: 
+- `_tide_item_ssh_badge`: 
 - `abbrs`: Search abbreviations
 - `ack`: ack defaults, ~/.ackrc for more
 - `acorn`: Open Acorn.app with optional file(completion available)
@@ -47,7 +50,7 @@ __COMPLETIONS NOTE:__ for the file extension completion function to work, it nee
 - `ax`: Make file executable
 - `badge`: Set iTerm session badge
 - `bak`: move file to .bak version
-- `be`: n/a
+- `be`: 
 - `bid`: Get bundle id for app name
 - `bld`: Run howzit build system
 - `box`: Draw a box around text.
@@ -66,11 +69,12 @@ __COMPLETIONS NOTE:__ for the file extension completion function to work, it nee
 - `cl`: copy output of last command to clipboard
 - `clip`: Copy file to clipboard
 - `code`: n/a
-- `copy`: n/a
-- `corner_print`: n/a
+- `copy`: 
+- `corner_print`: 
 - `cpwd`: Copy the current directory path to the clipboard
 - `cr`: Open CodeRunner
 - `crush`: pngcrush
+- `cursor`: Show or hide the terminal cursor
 - `dadjoke`: Get a dad joke from icanhazdadjoke.com
 - `dash`: Open argument in Dash
 - `days_in`: get the number of days in a given month/year
@@ -97,7 +101,7 @@ __COMPLETIONS NOTE:__ for the file extension completion function to work, it nee
 - `findgist`: select gist from list and display contents
 - `findgistid`: select gist from list and display contents
 - `fire`: Open Firefox with optional file (completion available)
-- `fish_prompt`: n/a
+- `fish_prompt`: 
 - `fix`: Fix up last command with search/replace
 - `flush`: Flush DNS cache
 - `fo`: Open file using jump shortcuts and fuzzy matching
@@ -119,6 +123,7 @@ __COMPLETIONS NOTE:__ for the file extension completion function to work, it nee
 - `gsearch`: Grep git commit history
 - `gt`: jump to top level of git repo
 - `gtheirs`: Resolve git conflicts with theirs
+- `halp`: Get help for any builtin, alias, or function
 - `hook`: n/a
 - `hooks`: Return a list of files hooked to target (Hook.app)
 - `howlong`: alias howlong=echo $CMD_DURATION
@@ -139,7 +144,7 @@ __COMPLETIONS NOTE:__ for the file extension completion function to work, it nee
 - `lld`: n/a
 - `lno`: Print file with line numbers
 - `lsgrep`: Wildcard folder/file search
-- `lsregister`: n/a
+- `lsregister`: 
 - `lsz`: ls for inside of compressed archives
 - `lt`: List directory from oldest to newest
 - `ltr`: List directory from newest to oldest
@@ -164,7 +169,7 @@ __COMPLETIONS NOTE:__ for the file extension completion function to work, it nee
 - `prev`: Open Preview with optional file (completion available)
 - `preview`: Preview text files using fzf and bat
 - `prioritize`: set a numeric prefix on a file for sorting
-- `prompt_message`: n/a
+- `prompt_message`: 
 - `r`: Run Reiki via bash
 - `raise`: Like ruby raise, but for fish
 - `rule`: Print a horizontal rule
@@ -204,17 +209,17 @@ __COMPLETIONS NOTE:__ for the file extension completion function to work, it nee
 
 ### Utility functions
 
-- `__by_length`: n/a
-- `__ff_dir_regex`: n/a
-- `__ff_dir_to_regex`: n/a
-- `__should_na`: n/a
-- `__sort_by_length`: n/a
+- `__by_length`: 
+- `__ff_dir_regex`: 
+- `__ff_dir_to_regex`: 
+- `__should_na`: 
+- `__sort_by_length`: 
 - `append_slash`: append a slash to each line/argument if needed
-- `map`: n/a
+- `map`: 
 - `remove_empty`: removes empty elements from an array
 - `return_array`: Echo out an array one line at a time
 - `shorten_home`: substitutes $HOME with ~
-- `shortest_common`: n/a
+- `shortest_common`: 
 - `slash_if_dir`: Add trailing slash if directory
 - `trim_pwd`: removes the current working directory from an array of paths
 
