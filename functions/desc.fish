@@ -83,17 +83,28 @@ function desc --description 'Print the description of a Fish function.'
 		echo "     Run with no arguments to list all functions. Include a single argument to display just that function/alias."
 		echo
 		echo "COMMAND OPTIONS"
+		echo "     --all                - List all functions (default if run without arguments)"
 		echo "     -k, --apropos=QUERY  - Search functions and aliases for "
 		echo "     -a, --alias          - Search aliases only"
 		echo "     --nocolor            - Don't colorize output"
-		echo "     --all                - List all functions (default if run without arguments)"
-		echo "     --menu               - Preview functions in menu (requires fzf)"
+		echo "     -m, --menu           - Preview functions in menu (requires fzf)"
 	end
 
 	if set -q _flag_help
 		print_help
 		return 0
 	end
+
+	set -l cmd_list_alias "__desc_list_aliases"
+	set -l cmd_describe "__desc_describe"
+	set -l cmd_desc "desc --nocolor"
+
+	if not set -q _flag_nocolor
+		set cmd_list_alias "__desc_list_aliases --color"
+		set cmd_describe "__desc_describe --color"
+		set cmd_desc "desc"
+	end
+
 
 	if set -q _flag_menu
 		if set -q _flag_alias
@@ -106,27 +117,13 @@ function desc --description 'Print the description of a Fish function.'
 
 	if set -q _flag_apropos
 		if set -q _flag_alias
-			if set -q _flag_nocolor
-				desc --nocolor --all --alias | grep --color=never -i "$_flag_apropos" | less -XFr
-			else
-				desc --all --alias | grep -i "$_flag_apropos" | less -XFr
-			end
+			eval "$cmd_desc --all --alias" | grep --color=never -i "$_flag_apropos" | less -XFr
 		else
-			if set -q _flag_nocolor
-				desc --nocolor --all | grep --color=never -i "$_flag_apropos" | less -XFr
-			else
-				desc --all | grep -i "$_flag_apropos" | less -XFr
-			end
+			eval "$cmd_desc --all" | grep --color=never -i "$_flag_apropos" | less -XFr
 		end
 		return 0
-	end
-
-	if set -q _flag_alias
-		if set -q _flag_nocolor
-			__desc_list_aliases | less -XFr
-		else
-			__desc_list_aliases --color | less -XFr
-		end
+	else if set -q _flag_alias
+		eval "$cmd_list_alias" | less -XFr
 		return 0
 	end
 
@@ -134,22 +131,14 @@ function desc --description 'Print the description of a Fish function.'
 	if set -q _flag_all
 		set -l descriptions
 		for f in (functions | sed -E 's/(.*), /\1\n/g')
-			if set -q _flag_nocolor
-				set -a descriptions (desc --nocolor $f)
-			else
-				set -a descriptions (desc $f)
-			end
+			set -a descriptions (eval "$cmd_desc $f")
 		end
 		printf '%s\n' $descriptions | less -XFr
 
 		return 0
 	else
 		if test (count $argv) -eq 0
-			if set -q _flag_nocolor
-				desc --nocolor --all
-			else
-				desc --all
-			end
+			eval "$cmd_desc --all"
 			return 1
 		end
 
@@ -170,10 +159,6 @@ function desc --description 'Print the description of a Fish function.'
 		# end
 
 		# Print description
-		if set -q _flag_nocolor
-			__desc_describe $argv
-		else
-			__desc_describe --color $argv
-		end
+		eval "$cmd_describe $argv"
 	end
 end
