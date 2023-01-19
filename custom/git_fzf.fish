@@ -105,6 +105,15 @@ function __git_fzf_git_log
 		| fzf_add_multi_hashes_to_commandline
 end
 
+function __git_fzf_stage
+	__git_fzf_is_in_git_repo; or return
+	git add .
+end
+
+function __git_fzf_unstage
+	git reset . &> /dev/null
+end
+
 # https://gist.github.com/junegunn/8b572b8d4b5eddd8b85e5f4d40f17236
 function git_fzf_key_bindings -d "Set custom key bindings for git+fzf"
 	bind \cg\cf __git_fzf_git_status
@@ -112,4 +121,6 @@ function git_fzf_key_bindings -d "Set custom key bindings for git+fzf"
 	bind \cg\ct __git_fzf_git_tag
 	bind \cg\ch __git_fzf_git_log
 	bind \cg\cr __git_fzf_git_remote
+	bind \cg\ca __git_fzf_stage
+	bind \cg\ce __git_fzf_unstage
 end

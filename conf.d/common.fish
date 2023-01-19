@@ -1,3 +1,13 @@
+# adapted from https://gist.github.com/oneohthree/f528c7ae1e701ad990e6
+function slugify
+	echo $argv | LC_ALL=C command iconv -t ascii//TRANSLIT | LC_ALL=C command sed -E 's/[^a-zA-Z0-9\-]+/_/g' | LC_ALL=C command sed -E 's/^(-|_)+|(-|_)+$//g'
+end
+
+# Slugify you can pipe to
+function to_slug
+	cat | LC_ALL=C command iconv -t ascii//TRANSLIT | LC_ALL=C command sed -E 's/[^a-zA-Z0-9\-]+/_/g' | LC_ALL=C command sed -E 's/^(-|_)+|(-|_)+$//g'
+end
+
 function shortest_common
 	set -l root $argv[1]
 	set -l results $argv[1]
@@ -27,7 +37,7 @@ end
 
 function __should_na --on-variable PWD
 	# function __should_na --on-event fish_prompt
-	test -s (basename $PWD)".taskpaper" && ~/scripts/fish/na
+	test -s (basename $PWD)".taskpaper" && na
 end
 
 function __sort_by_length

@@ -1,0 +1,29 @@
+fish_color_autosuggestion 586e75
+fish_color_cancel normal
+fish_color_command afd787
+fish_color_comment 626262
+fish_color_cwd 008000
+fish_color_cwd_root 800000
+fish_color_end ff5faf
+fish_color_error ff87af
+fish_color_escape 00a6b2
+fish_color_history_current normal
+fish_color_host normal
+fish_color_host_remote yellow
+fish_color_match normal
+fish_color_normal normal
+fish_color_operator 00a6b2
+fish_color_option b08fbf
+fish_color_param 87d7ff
+fish_color_quote 5fafd7
+fish_color_redirection ffd7af
+fish_color_search_match ffff00
+fish_color_selection c0c0c0
+fish_color_status red
+fish_color_user 00ff00
+fish_color_valid_path normal
+fish_pager_color_completion normal
+fish_pager_color_description 'B3A06D'  'yellow'
+fish_pager_color_prefix 'white'  '--bold'  '--underline'
+fish_pager_color_progress 'brwhite'  '--background=cyan'
+fish_pager_color_selected_background -r

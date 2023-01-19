@@ -1,1 +1,1 @@
-complete -fkc afff -a '(__complete_extension "png jpg jpeg afphoto psd")'
+complete -xkc afff -a '(__complete_extension "png jpg jpeg afphoto psd")'

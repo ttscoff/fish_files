@@ -21,7 +21,7 @@ __COMPLETIONS NOTE:__ for the file extension completion function to work, it nee
 - `64enc`: encode a given image file as base64 and output css background property to clipboard
 - `64font`: encode a given font file as base64 and output css background property to clipboard
 - `64svg`: encode a given svg file as base64 and output css background-image property to clipboard
-- `__auto_dir`: if command fails see if it\'s a directory or local executable
+- `__auto_dir`: if command fails see if it's a directory or local executable
 - `__best_pager`: Choose the best available pager (opinionated)
 - `__complete_extension`: 
 - `__exec_available`: test if command is available
@@ -49,7 +49,7 @@ __COMPLETIONS NOTE:__ for the file extension completion function to work, it nee
 - `alpha`: Open ImageAlpha with optional file (completion available)
 - `ax`: Make file executable
 - `badge`: Set iTerm session badge
-- `bak`: move file to .bak version
+- `bak`: Back up a file by moving or copying to FILE.bak
 - `be`: 
 - `bid`: Get bundle id for app name
 - `bld`: Run howzit build system
@@ -58,8 +58,8 @@ __COMPLETIONS NOTE:__ for the file extension completion function to work, it nee
 - `bunches`: Edit Bunches in Sublime
 - `c`: n/a
 - `calc`: CLI calculator
-- `cat`: Use bat instead of cat unless it\'s a Markdown file, then use mdless
-- `cbp`: n/a
+- `cat`: Use bat instead of cat unless it's a Markdown file, then use mdless
+- `cbp`: ClipBoard Preview
 - `cd_fuzz`: n/a
 - `cdb`: Open broot with folders only
 - `cdd`: Choose cd dir from menu (fzf)
@@ -71,6 +71,7 @@ __COMPLETIONS NOTE:__ for the file extension completion function to work, it nee
 - `code`: n/a
 - `copy`: 
 - `corner_print`: 
+- `cpu`: 
 - `cpwd`: Copy the current directory path to the clipboard
 - `cr`: Open CodeRunner
 - `crush`: pngcrush
@@ -82,8 +83,10 @@ __COMPLETIONS NOTE:__ for the file extension completion function to work, it nee
 - `degit`: Remove all traces of git from a folder
 - `desc`: Print the description of a Fish function.
 - `describe`: Show description for function
+- `dhelp`: alias dhelp open "dash://fish:"(urlenc $argv)
 - `dirfor`: get origin directory for running process
 - `dman`: Open man page in Dash
+- `dockcomm`: commit a docker image
 - `docx2mmd`: Convert docx to markdown: docx2md [source] [target]
 - `eds`: Shortcut for editscript
 - `er`: edit recent file using fasd and fzf
@@ -100,8 +103,9 @@ __COMPLETIONS NOTE:__ for the file extension completion function to work, it nee
 - `filetype`: Returns the kMDItemContentTypeTree for a file
 - `findgist`: select gist from list and display contents
 - `findgistid`: select gist from list and display contents
+- `finish`: Finish last unfinished task by search
 - `fire`: Open Firefox with optional file (completion available)
-- `fish_prompt`: 
+- `fish_prompt`: Write out the prompt
 - `fix`: Fix up last command with search/replace
 - `flush`: Flush DNS cache
 - `fo`: Open file using jump shortcuts and fuzzy matching
@@ -114,6 +118,7 @@ __COMPLETIONS NOTE:__ for the file extension completion function to work, it nee
 - `geminstall`: install a gem with fuzzy search
 - `gemuninstall`: Uninstall a gem with partial name matching
 - `get_ext`: Get the file extension from the argument
+- `get`: alias get=git clone
 - `getignore`: Get ignore file from gitignore.io and save to .gitignore
 - `getignores`: Pull gitignore.io list of available .gitignore files
 - `gg`: Commit pending changes and quote all args as message
@@ -136,11 +141,14 @@ __COMPLETIONS NOTE:__ for the file extension completion function to work, it nee
 - `ips`: Display all ip addresses for this host
 - `is`: test if given file is of a file type. is TYPE FILE
 - `istext`: test if given file is plain text
+- `jfind`: jtag: search for tags
+- `jothers`: jtag: List tags of other posts containing (all) tags
 - `js`: lint with jslint
 - `jump_fasd`: n/a
 - `jump`: Fish "jump" replacement with subdirectory matching
 - `lb`: Select file in LaunchBar, fall back to the current directory
 - `lbash`: launch bash login shell
+- `license`: 
 - `lld`: n/a
 - `lno`: Print file with line numbers
 - `lsgrep`: Wildcard folder/file search
@@ -152,6 +160,7 @@ __COMPLETIONS NOTE:__ for the file extension completion function to work, it nee
 - `mack`: ack for markdown
 - `md`: n/a
 - `mdgrep`: alias mdgrep=rg -S --type markdown
+- `mem`: 
 - `mkdir`: mkdir with subdirs, option to cd after creating
 - `mmdc`: Open MultiMarkdown Composer with optional file (completion available)
 - `nope`: echo "nope"
@@ -178,9 +187,11 @@ __COMPLETIONS NOTE:__ for the file extension completion function to work, it nee
 - `serve`: Start a local server for the current directory, open in browser
 - `shellesc`: Ruby shellwords escape
 - `shellunesc`: Ruby shellwords unescape
+- `shellwords`: Split a string like a shell would
 - `shorten`: Truncate every line of input to specified width
 - `shortest`: Return the shortest string in array
 - `showalias`: Show an alias
+- `sign`: alias sign=codesign --force --verbose --sign 'Developer ID Application' -o runtime
 - `skylight`: alias skylight=skylighting -n -t ~/styles/kde/breeze-dark.theme
 - `spell`: Get spelling options from aspell
 - `spellcheck`: Check all Markdown files in git repo (recursive)
@@ -190,6 +201,7 @@ __COMPLETIONS NOTE:__ for the file extension completion function to work, it nee
 - `sum`: Take a list of numbers and return the sum
 - `td`: [Create and] open project todo
 - `tmj`: For use with my tmux utility (bash_scripts/tm)
+- `todos`: alias todos=ack --nobreak --nocolor "(TODO|FIXME):"|sed -E "s/(.*:[[:digit:]]+):.*((TODO|FIXME):.*)/\\2 :>> \\1/"|grep -E --color=always ":>>.*:\\d+"
 - `tower`: Open Tower for directory (default CWD)
 - `tp`: Open TaskPaper with optional file (completion available)
 - `unbak`: remove bak extension
@@ -199,6 +211,7 @@ __COMPLETIONS NOTE:__ for the file extension completion function to work, it nee
 - `updown`: cd to a directory and then fuzzy search its tree
 - `urlenc`: url encode the passed string
 - `v`: vim via fasd and fzf
+- `verify`: alias verify=codesign --deep -vv --verify
 - `warn`: Echo to STDERR
 - `watchthis`: Watch for changes in the current directory and execute command
 - `xc`: Open Xcode with optional file (completion available)
@@ -221,7 +234,8 @@ __COMPLETIONS NOTE:__ for the file extension completion function to work, it nee
 - `shorten_home`: substitutes $HOME with ~
 - `shortest_common`: 
 - `slash_if_dir`: Add trailing slash if directory
+- `slugify`: 
+- `to_slug`: 
 - `trim_pwd`: removes the current working directory from an array of paths
-
 
 I'll update these every once in a while. If you're digging through and spot a problem, a stupid mistake, or something that could just plain be done better, please add an issue and let me know!
