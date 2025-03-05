@@ -6,7 +6,7 @@ A collection of configuration files and functions for the Fish shell. These woul
 
 - __bash_scripts__: some utilities that were too much trouble to port from Bash and work just as well run with hashbangs. They just need to be in the $PATH (some commands reference my local path, `~/scripts/fish`, which will need updating).
 
-- __completions__: various completion configurations for custom commands. 
+- __completions__: various completion configurations for custom commands.
 
 - __custom__: some files I source at login (from `config.fish`), mostly shared functions I think I need to have in memory (as opposed to autoloaded), and some aliases that don't make great functions.
 
@@ -16,29 +16,28 @@ __COMPLETIONS NOTE:__ for the file extension completion function to work, it nee
 
 ## All the functions
 
-
-
 - `64enc`: encode a given image file as base64 and output css background property to clipboard
 - `64font`: encode a given font file as base64 and output css background property to clipboard
 - `64svg`: encode a given svg file as base64 and output css background-image property to clipboard
-- `__auto_dir`: if command fails see if it's a directory or local executable
+- `__auto_dir`: n/a
 - `__best_pager`: Choose the best available pager (opinionated)
-- `__complete_extension`: 
+- `__complete_extension`: Complete extension with filecomplete.rb
 - `__exec_available`: test if command is available
 - `__expand_path`: commandline function to expand str/str using fasd and fzf
-- `__f_dir_regex`: 
-- `__fuzzy_cd`: n/a
+- `__f_dir_regex`: Construct regex from multiple directory arguments
+- `__fuzzy_cd`: fuzzy cd with jump bookmarks
 - `__human_time`: Humanize a time interval for display
 - `__is_text`: Test if a file is plain text
 - `__ls_text_files`: List all text files in current directory
 - `__prev_token`: Get the previous token on the command line
 - `__re_extension`: remove extension from word under/before cursor
 - `__regex_from_args`: Helper to create greedy regular expression from multiple arguments
-- `__unfuck_previous_command`: 
-- `_tide_item_doing_active`: 
-- `_tide_item_doing_now`: 
-- `_tide_item_message`: 
-- `_tide_item_ssh_badge`: 
+- `__unfuck_previous_command`: Unfuck the previous command
+- `_doing_is_active`: Check if doing is active
+- `_tide_item_doing_active`:
+- `_tide_item_doing_now`:
+- `_tide_item_message`:
+- `_tide_item_ssh_badge`:
 - `abbrs`: Search abbreviations
 - `ack`: ack defaults, ~/.ackrc for more
 - `acorn`: Open Acorn.app with optional file(completion available)
@@ -48,9 +47,10 @@ __COMPLETIONS NOTE:__ for the file extension completion function to work, it nee
 - `ag`: Silver Surfer defaults, smart case, ignore VCS
 - `alpha`: Open ImageAlpha with optional file (completion available)
 - `ax`: Make file executable
+- `b`: Run a binstub from the current project with bundler
 - `badge`: Set iTerm session badge
 - `bak`: Back up a file by moving or copying to FILE.bak
-- `be`: 
+- `be`: Run a command in the context of the current bundle
 - `bid`: Get bundle id for app name
 - `bld`: Run howzit build system
 - `box`: Draw a box around text.
@@ -58,20 +58,30 @@ __COMPLETIONS NOTE:__ for the file extension completion function to work, it nee
 - `bunches`: Edit Bunches in Sublime
 - `c`: n/a
 - `calc`: CLI calculator
+- `capitalize`: Capitalize the first letter of a given text
 - `cat`: Use bat instead of cat unless it's a Markdown file, then use mdless
+- `catc`: Concatenate files and print on the standard output (bypass cat alias)
 - `cbp`: ClipBoard Preview
 - `cd_fuzz`: n/a
 - `cdb`: Open broot with folders only
 - `cdd`: Choose cd dir from menu (fzf)
 - `cdr`: cd to a recently visited directory
 - `cdt`: Change dir based on TagFiler tags
+- `char-count`: Count characters in a file
 - `chrome`: Open Google Chrome with optional file (completion available)
 - `cl`: copy output of last command to clipboard
+- `clean-unzip`: Unzip a zipfile to a clean folder
 - `clip`: Copy file to clipboard
 - `code`: n/a
-- `copy`: 
-- `corner_print`: 
-- `cpu`: 
+- `codep`: Open a VS Code project (completion available)
+- `coln`: Column N
+- `confirm`: Prompt for confirmation
+- `cop`: alias cop=gh copilot
+- `cope`: alias cope=gh copilot explain
+- `cops`: alias cops=gh copilot suggest
+- `copy`: Copy piped contents to clipboard without newlines
+- `corner_print`: Print to a corner of the screen
+- `cpu`: Show CPU usage
 - `cpwd`: Copy the current directory path to the clipboard
 - `cr`: Open CodeRunner
 - `crush`: pngcrush
@@ -80,15 +90,29 @@ __COMPLETIONS NOTE:__ for the file extension completion function to work, it nee
 - `dash`: Open argument in Dash
 - `days_in`: get the number of days in a given month/year
 - `ddg`: search duckduckgo
+- `default`: Default value if first argument is empty
 - `degit`: Remove all traces of git from a folder
 - `desc`: Print the description of a Fish function.
 - `describe`: Show description for function
-- `dhelp`: alias dhelp open "dash://fish:"(urlenc $argv)
+- `dhelp`: Display command help in Dash
 - `dirfor`: get origin directory for running process
+- `dit`: alias dit docker run -it
 - `dman`: Open man page in Dash
 - `dockcomm`: commit a docker image
-- `docx2mmd`: Convert docx to markdown: docx2md [source] [target]
+- `dockerfish`: alias dockerfish docker run -it --rm andreiborisov/fish:3
+- `docx2mmd`: Convert docx to markdown: docx2mmd [source] [target]
+- `doing_active`: Check if doing is active and add tide item
+- `doing_now`: Get the current doing now for tide
+- `dpl`: alias dpl=howzit -r deploy
+- `dpld`: howzit -r --default deploy
+- `dpln`: howzit -r --no deploy
+- `dply`: howzit -r --yes deploy
+- `eat`: Move files from a directory to the current directory
+- `echo-variable`: Echo the value of a variable, uppercased if needed
+- `edit-git`: Edit the first file changed in the current git branch
+- `edit-gitconfig`: Edit the git config file for the current repo
 - `eds`: Shortcut for editscript
+- `ensure-trailing-newline`: Ensure a file ends with a newline
 - `er`: edit recent file using fasd and fzf
 - `esc`: Ruby cgi escape
 - `eschtml`: Ruby cgi HTML escape
@@ -103,16 +127,19 @@ __COMPLETIONS NOTE:__ for the file extension completion function to work, it nee
 - `filetype`: Returns the kMDItemContentTypeTree for a file
 - `findgist`: select gist from list and display contents
 - `findgistid`: select gist from list and display contents
-- `finish`: Finish last unfinished task by search
+- `finish`: Finish last unfinished doing task by search
 - `fire`: Open Firefox with optional file (completion available)
-- `fish_prompt`: Write out the prompt
 - `fix`: Fix up last command with search/replace
 - `flush`: Flush DNS cache
 - `fo`: Open file using jump shortcuts and fuzzy matching
 - `fp`: Find and list processes matching a case-insensitive fuzzy-match string
 - `ft`: A shortcut for mdfinding tagged items system-wide
 - `fuck`: Correct your previous console command
+- `funced-last`: Edit last function
+- `funcsave-last`: Save last function
+- `funcsubl`: Edit a function with Sublime Text (autosaves)
 - `g2`: Fish "jump" replacement with fuzzy subdirectory matching
+- `gaa`: alias gaa git add (git top)
 - `gc`: n/a
 - `geminfo`: Get info for a gem with partial name matching
 - `geminstall`: install a gem with fuzzy search
@@ -122,120 +149,167 @@ __COMPLETIONS NOTE:__ for the file extension completion function to work, it nee
 - `getignore`: Get ignore file from gitignore.io and save to .gitignore
 - `getignores`: Pull gitignore.io list of available .gitignore files
 - `gg`: Commit pending changes and quote all args as message
+- `gi`: gitignore.io cli for fish
+- `git-changing-files`: List all files that have changed in the current git repository
+- `git-protocol-https-to-git`: Change git remote protocol from https to git
+- `git-restage`: Restage all changes in the current git repository
+- `git-restore`: Restore files in the working tree from the index or another tree
 - `gitar`: Automatically add new and remove deleted files from the git index
-- `gitrelease`: Create a git release
+- `gitrelease`: Create a git release using hub
 - `gmine`: Resolve git conflicts with mine
 - `gsearch`: Grep git commit history
 - `gt`: jump to top level of git repo
 - `gtheirs`: Resolve git conflicts with theirs
+- `h`: howdoi shortcut
 - `halp`: Get help for any builtin, alias, or function
-- `hook`: n/a
-- `hooks`: Return a list of files hooked to target (Hook.app)
-- `howlong`: alias howlong=echo $CMD_DURATION
+- `hi`: Import history
+- `hist`: Print the command from history
+- `history_select`: Select a command from history (fzf)
+- `hmark`: n/a
+- `hooks`: n/a
+- `howlong`: show last command execution time
 - `hs`: Search, select, and exec from history
 - `idea`: Record an idea with doing
+- `idletil`: Wait until system idle time has reached X seconds and optionally execute command (requires beengone)
 - `imdown`: Test for internet connection and notify when it comes up
 - `imgsize`: Quickly get image dimensions from the command line
 - `index_of`: return the 1-based index of the first argument in remaining arguments
+- `insert_aligned`: Replace a portion of a string with another string with alignment
+- `insert`: Insert a string in another string at start position
 - `ip`: Get external IP address
 - `ips`: Display all ip addresses for this host
+- `is-clean-zip`: Check if a zipfile is clean
 - `is`: test if given file is of a file type. is TYPE FILE
+- `isodate`: Return the current date in ISO 8601 format
+- `isodatetime`: Return the current date and time in ISO 8601 format
 - `istext`: test if given file is plain text
 - `jfind`: jtag: search for tags
 - `jothers`: jtag: List tags of other posts containing (all) tags
-- `js`: lint with jslint
 - `jump_fasd`: n/a
 - `jump`: Fish "jump" replacement with subdirectory matching
+- `last_history_item`: Return the last item from command history
 - `lb`: Select file in LaunchBar, fall back to the current directory
 - `lbash`: launch bash login shell
-- `license`: 
+- `license`: Get license text from GitHub
+- `line-count`: Count lines in a file
 - `lld`: n/a
 - `lno`: Print file with line numbers
+- `loop`: loop <count> <command>
+- `lsfuncs`: Print user-defined Fish functions (including any executable files in first path of $fish_user_paths).\n\tOpts:\n\t\t-a: only print fish functions;\n\t\t-p <paths>: pass additional path(s) in which to search for potential scripts, bins, commands.
 - `lsgrep`: Wildcard folder/file search
-- `lsregister`: 
+- `lsregister`: Rebuild Launch Services database
 - `lsz`: ls for inside of compressed archives
 - `lt`: List directory from oldest to newest
 - `ltr`: List directory from newest to oldest
 - `m.`: Check if the current directory is bookmarked
 - `mack`: ack for markdown
-- `md`: n/a
-- `mdgrep`: alias mdgrep=rg -S --type markdown
-- `mem`: 
+- `md`: Test if current directory is bookmarked
+- `mdgrep`: ripgrep for markdown
+- `mem`: Show memory usage
 - `mkdir`: mkdir with subdirs, option to cd after creating
-- `mmdc`: Open MultiMarkdown Composer with optional file (completion available)
+- `mmdc`: Open MultiMarkdown Composer 5 with optional file (completion available)
+- `move`: move files and directories
+- `nman`: Open man pages in a new terminal window
 - `nope`: echo "nope"
 - `o`: Shortcut to open an app from the command line
 - `optim`: Open ImageOptim with optional file (completion available)
 - `pbgist`: private gist from clipboard
-- `pbgistp`: private gist from clipboard
+- `pbgistp`: gist from clipboard
 - `pbp`: Pasteboard Preview
 - `pbpmd`: Pasteboard Markdown Preview
 - `percentof`: Quick calculation for sale discounts
 - `percentoff`: Quick calculation for sale discounts
-- `pg`: alias pg=ps -ax | grep -i
+- `pg`: Case insensitive search for process
 - `pless`: cat a file with pygments highlighting
 - `pman`: Display a man page as a PostScript PDF in Preview.app
 - `prev`: Open Preview with optional file (completion available)
 - `preview`: Preview text files using fzf and bat
 - `prioritize`: set a numeric prefix on a file for sorting
-- `prompt_message`: 
+- `prompt_message`: Set the prompt message
 - `r`: Run Reiki via bash
 - `raise`: Like ruby raise, but for fish
-- `rule`: Print a horizontal rule
-- `rulem`: Print a horizontal rule with message
-- `rvm`: n/a
+- `random-file`: Select a random file from the current directory
+- `readpass`: Read a password from stdin and export it as an environment variable
+- `remove_user_path`: Shows user added PATH entries and removes the selected one (fzf)
+- `remove`: Remove files and directories, but only if they are git repositories
+- `rename-pwd`: Rename the current directory to new_name
+- `repeat`: Repeat the given command indefinitely with a pause
+- `retry`: Retry a command until it succeeds
+- `rule`: Print a horizontal rule with optional message
 - `serve`: Start a local server for the current directory, open in browser
+- `setapp`: Get an is.gd link to a setapp affiliate page for an app (requires Setapp Affiliate shortcut)
+- `setapplink`: Generate an internal Setapp link for an app
 - `shellesc`: Ruby shellwords escape
 - `shellunesc`: Ruby shellwords unescape
 - `shellwords`: Split a string like a shell would
 - `shorten`: Truncate every line of input to specified width
 - `shortest`: Return the shortest string in array
 - `showalias`: Show an alias
-- `sign`: alias sign=codesign --force --verbose --sign 'Developer ID Application' -o runtime
+- `sign`: Sign a macOS app with Developer ID Application
 - `skylight`: alias skylight=skylighting -n -t ~/styles/kde/breeze-dark.theme
 - `spell`: Get spelling options from aspell
 - `spellcheck`: Check all Markdown files in git repo (recursive)
-- `spellf`: Get spelling options from aspell
+- `spellf`: Get first spelling option from aspell
 - `src`: reload config file
-- `sublp`: Open a Sublime Text project (completion available)
+- `stretch`: Stretch and Clean URL (requires Stretch and Clean URL Shortcut)
+- `sublp`: Open a VS Code project (completion available)
 - `sum`: Take a list of numbers and return the sum
+- `symlink`: Create a symlink from _from to _to, makes paths absolute
 - `td`: [Create and] open project todo
+- `title-case`: Convert a string to title case
 - `tmj`: For use with my tmux utility (bash_scripts/tm)
-- `todos`: alias todos=ack --nobreak --nocolor "(TODO|FIXME):"|sed -E "s/(.*:[[:digit:]]+):.*((TODO|FIXME):.*)/\\2 :>> \\1/"|grep -E --color=always ":>>.*:\\d+"
+- `todos`: Search for TODOs and FIXMEs in the current directory
 - `tower`: Open Tower for directory (default CWD)
 - `tp`: Open TaskPaper with optional file (completion available)
+- `trim-left`: Trim character left
+- `trim-right`: Trim character right
+- `trim-scheme`: Trim the scheme from a URL
+- `trim-trailing-slash`: Trim trailing slashes from a string
+- `tunnel`: Create a tunnel to a host and port
 - `unbak`: remove bak extension
 - `uncolor`: Remove color codes from string
 - `unesc`: Ruby cgi unescape
+- `unexpand-home-tilde`: Change $HOME to ~
 - `up`: cd to a parent folder with fuzzy matching
 - `updown`: cd to a directory and then fuzzy search its tree
+- `urldec`: URL decode
 - `urlenc`: url encode the passed string
 - `v`: vim via fasd and fzf
 - `verify`: alias verify=codesign --deep -vv --verify
+- `vimver`: Open the version file of the current gem in vim
 - `warn`: Echo to STDERR
+- `watchdns`: n/a
 - `watchthis`: Watch for changes in the current directory and execute command
+- `whatsonport`: find out what PID is running on a port (requires password)
+- `wifi-network-name`: Get the name of the current wifi network
+- `wifi-password`: Get the password for the current wifi network
+- `wifi-reset`: Reset the Wi-Fi connection
+- `word-count`: Count the number of words in a string (piped)
 - `xc`: Open Xcode with optional file (completion available)
 - `yep`: echo "yep"
 - `yn`: Simple pass/fail test for given command
 - `z`: Custom fasd cd with fzf
 - `zipup`: exports a clean copy of the current git repo (master) to a zip file
 
+
+
 ### Utility functions
 
-- `__by_length`: 
-- `__ff_dir_regex`: 
-- `__ff_dir_to_regex`: 
-- `__should_na`: 
-- `__sort_by_length`: 
+- `__by_length`:
+- `__ff_dir_regex`:
+- `__ff_dir_to_regex`:
+- `__should_na`:
+- `__sort_by_length`:
 - `append_slash`: append a slash to each line/argument if needed
-- `map`: 
+- `map`:
 - `remove_empty`: removes empty elements from an array
 - `return_array`: Echo out an array one line at a time
 - `shorten_home`: substitutes $HOME with ~
-- `shortest_common`: 
+- `shortest_common`:
 - `slash_if_dir`: Add trailing slash if directory
-- `slugify`: 
-- `to_slug`: 
+- `slugify`:
+- `to_slug`:
 - `trim_pwd`: removes the current working directory from an array of paths
 
 I'll update these every once in a while. If you're digging through and spot a problem, a stupid mistake, or something that could just plain be done better, please add an issue and let me know!
+

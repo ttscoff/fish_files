@@ -1,7 +1,7 @@
 function halp -d 'Get help for any builtin, alias, or function'
     set -l apro false
-    set -l helpstring "Usage: halp COMMAND";
-    set -l options "k/apropos" "h/help"
+    set -l helpstring "Usage: halp COMMAND"
+    set -l options k/apropos h/help
 
     argparse $options -- $argv
 
@@ -31,7 +31,9 @@ function halp -d 'Get help for any builtin, alias, or function'
 
     if test (string match "file" $cmdtest)
         if test (man $cmd &> /dev/null; echo $status) -eq 0
-            man $cmd
+            # if you don't have Dash with the manpage docset loaded, switch the lines below
+            # man $cmd
+            open "dash://man%3A$cmd"
         else if test ($cmd -h &> /dev/null; echo $status) -eq 0
             $cmd -h
         else

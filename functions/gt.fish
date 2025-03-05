@@ -1,3 +1,8 @@
 function gt -d "jump to top level of git repo"
-	cd (git rev-parse --show-toplevel) $argv
+
+    if test (count $argv) -gt 0
+        echo "Warning: Any additional arguments will be ignored."
+    end
+
+    cd (git rev-parse --show-toplevel) $argv
 end

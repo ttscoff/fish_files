@@ -1,4 +1,7 @@
-# Defined in /var/folders/q7/sps8n5_534q22bx1ts4xjjl00000gn/T//fish.IrdXyc/be.fish @ line 1
-function be
-	bundle exec bin/$argv
+function be --wraps bundle -d 'Run a command in the context of the current bundle'
+    bundle exec $argv
+    # Optionally, add more functionality or error handling here in the future
+    if [ $? -ne 0 ]; then
+        echo "Error: Command failed to execute."
+    fi
 end

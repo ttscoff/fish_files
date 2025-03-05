@@ -10,6 +10,8 @@ function fasdfzf -d 'Helper function to return a file via fasd and fzf'
 		set args 'a'$args
 	end
 
+  set args '--layout=reverse-list' $args
+
 	set -l tgt (fasd -$args $argv | fzf -1 -0)
 	if [ (echo $tgt) ]
 		echo "$tgt"

@@ -1,3 +1,3 @@
-function cpu
-  command top -o cpu $argv
+function cpu --description 'Show CPU usage'
+    command top -o cpu $argv
 end

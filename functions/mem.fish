@@ -1,3 +1,3 @@
-function mem
-  command top -o rsize $argv
+function mem --description 'Show memory usage'
+    command top -o rsize $argv
 end
