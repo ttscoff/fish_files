@@ -1,4 +1,5 @@
 complete -xc howzit -a "(howzit -L)"
+complete -xc howzit -l edit-template -a "(howzit --templates-c)" -d "Edit a template"
 complete -c howzit -l default  -d "Answer all prompts with default response"
 complete -c howzit -x -s m -l matching -a "partial exact fuzzy beginswith" -d "Topics matching type"
 complete -c howzit -x -l multiple -a "first best all choose" -d "Multiple result handling"

@@ -1,1 +1,1 @@
-complete -xkc sublp -a '(__complete_extension "sublime-project")'
+complete -xkc sublp -a '(__complete_extension "code-workspace")'
