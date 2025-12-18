@@ -1,5 +1,27 @@
 function send -d "Send to other iTerm pane"
-    set target_dir (begin
+    # Parse options:
+    #   -m / --mv   move instead of copy
+    #   -h / --help show this help
+    argparse m/mv h/help -- $argv
+    or return
+
+    if set -q _flag_h
+        echo "send - Send to other iTerm pane"
+        echo
+        echo "Usage: send [OPTIONS] PATH..."
+        echo
+        echo "Options:"
+        echo "  -m, --mv     Move PATHs instead of copying (default is cp -r)."
+        echo "  -h, --help   Show this help message."
+        return 0
+    end
+
+    set -l do_move 0
+    if set -q _flag_m
+        set do_move 1
+    end
+
+    set -l target_dir (begin
         echo 'tell application "iTerm"'
         echo '    set theTab to current tab of current window'
         echo '    set sessionList to sessions of theTab'
@@ -27,10 +49,17 @@ function send -d "Send to other iTerm pane"
         echo 'end tell'
     end | osascript -)
 
+    # Normalize directory path once
+    set target_dir (echo $target_dir | string trim)
+
     # Now do whatever “send the $argv paths to that directory” means
     for p in $argv
-        set target_dir (echo $target_dir | string trim)
-        cp -r $p $target_dir/
-        warn "Copied $p to $target_dir"
+        if test $do_move -eq 1
+            mv $p $target_dir/
+            warn "Moved $p to $target_dir"
+        else
+            cp -r $p $target_dir/
+            warn "Copied $p to $target_dir"
+        end
     end
 end
