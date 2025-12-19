@@ -18,7 +18,7 @@ function ans --description 'Get the accepted or all answers from StackOverflow a
     if set -q _flag_all
         gather (echo "!stackoverflow.com $argv!!" | searchlink)
     else
-        gather --accepted-only $acc (echo "!stackoverflow.com $argv!!" | searchlink)
+        gather --accepted-only (echo "!stackoverflow.com $argv!!" | searchlink)
     end
 
 end
