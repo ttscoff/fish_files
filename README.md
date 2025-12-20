@@ -16,9 +16,7 @@ __COMPLETIONS NOTE:__ for the file extension completion function to work, it nee
 
 ## All the functions
 
-- `64enc`: encode a given image file as base64 and output css background property to clipboard
-- `64font`: encode a given font file as base64 and output css background property to clipboard
-- `64svg`: encode a given svg file as base64 and output css background-image property to clipboard
+
 - `__auto_dir`: n/a
 - `__best_pager`: Choose the best available pager (opinionated)
 - `__complete_extension`: Complete extension with filecomplete.rb
@@ -38,6 +36,9 @@ __COMPLETIONS NOTE:__ for the file extension completion function to work, it nee
 - `_tide_item_doing_now`:
 - `_tide_item_message`:
 - `_tide_item_ssh_badge`:
+- `64enc`: encode a given image file as base64 and output css background property to clipboard
+- `64font`: encode a given font file as base64 and output css background property to clipboard
+- `64svg`: encode a given svg file as base64 and output css background-image property to clipboard
 - `abbrs`: Search abbreviations
 - `ack`: ack defaults, ~/.ackrc for more
 - `acorn`: Open Acorn.app with optional file(completion available)
@@ -46,6 +47,7 @@ __COMPLETIONS NOTE:__ for the file extension completion function to work, it nee
 - `afff`: Open Affinity Photo with optional file (completion available)
 - `ag`: Silver Surfer defaults, smart case, ignore VCS
 - `alpha`: Open ImageAlpha with optional file (completion available)
+- `ans`: Get the accepted or all answers from StackOverflow as Markdown
 - `ax`: Make file executable
 - `b`: Run a binstub from the current project with bundler
 - `badge`: Set iTerm session badge
@@ -55,11 +57,10 @@ __COMPLETIONS NOTE:__ for the file extension completion function to work, it nee
 - `bld`: Run howzit build system
 - `box`: Draw a box around text.
 - `browser`: Write output to a temp HTML file and open in default browser
-- `bunches`: Edit Bunches in Sublime
 - `c`: n/a
 - `calc`: CLI calculator
 - `capitalize`: Capitalize the first letter of a given text
-- `cat`: Use bat instead of cat unless it's a Markdown file, then use mdless
+- `cat`: Use appropriate cat replacement for file type
 - `catc`: Concatenate files and print on the standard output (bypass cat alias)
 - `cbp`: ClipBoard Preview
 - `cd_fuzz`: n/a
@@ -85,7 +86,7 @@ __COMPLETIONS NOTE:__ for the file extension completion function to work, it nee
 - `cpwd`: Copy the current directory path to the clipboard
 - `cr`: Open CodeRunner
 - `crush`: pngcrush
-- `cursor`: Show or hide the terminal cursor
+- `cursor`: n/a
 - `dadjoke`: Get a dad joke from icanhazdadjoke.com
 - `dash`: Open argument in Dash
 - `days_in`: get the number of days in a given month/year
@@ -158,7 +159,7 @@ __COMPLETIONS NOTE:__ for the file extension completion function to work, it nee
 - `gitrelease`: Create a git release using hub
 - `gmine`: Resolve git conflicts with mine
 - `gsearch`: Grep git commit history
-- `gt`: jump to top level of git repo
+- `gt`: n/a
 - `gtheirs`: Resolve git conflicts with theirs
 - `h`: howdoi shortcut
 - `halp`: Get help for any builtin, alias, or function
@@ -209,6 +210,7 @@ __COMPLETIONS NOTE:__ for the file extension completion function to work, it nee
 - `mkdir`: mkdir with subdirs, option to cd after creating
 - `mmdc`: Open MultiMarkdown Composer 5 with optional file (completion available)
 - `move`: move files and directories
+- `nans`: Save the accepted answer from StackOverflow as Markdown to nvUltra
 - `nman`: Open man pages in a new terminal window
 - `nope`: echo "nope"
 - `o`: Shortcut to open an app from the command line
@@ -236,6 +238,7 @@ __COMPLETIONS NOTE:__ for the file extension completion function to work, it nee
 - `repeat`: Repeat the given command indefinitely with a pause
 - `retry`: Retry a command until it succeeds
 - `rule`: Print a horizontal rule with optional message
+- `send`: Send to other iTerm pane
 - `serve`: Start a local server for the current directory, open in browser
 - `setapp`: Get an is.gd link to a setapp affiliate page for an app (requires Setapp Affiliate shortcut)
 - `setapplink`: Generate an internal Setapp link for an app
@@ -266,6 +269,7 @@ __COMPLETIONS NOTE:__ for the file extension completion function to work, it nee
 - `trim-scheme`: Trim the scheme from a URL
 - `trim-trailing-slash`: Trim trailing slashes from a string
 - `tunnel`: Create a tunnel to a host and port
+- `tween`: Display lines between start and end line numbers
 - `unbak`: remove bak extension
 - `uncolor`: Remove color codes from string
 - `unesc`: Ruby cgi unescape
@@ -277,7 +281,7 @@ __COMPLETIONS NOTE:__ for the file extension completion function to work, it nee
 - `v`: vim via fasd and fzf
 - `verify`: alias verify=codesign --deep -vv --verify
 - `vimver`: Open the version file of the current gem in vim
-- `warn`: Echo to STDERR
+- `warn`: Echo log message to STDERR
 - `watchdns`: n/a
 - `watchthis`: Watch for changes in the current directory and execute command
 - `whatsonport`: find out what PID is running on a port (requires password)
@@ -290,8 +294,6 @@ __COMPLETIONS NOTE:__ for the file extension completion function to work, it nee
 - `yn`: Simple pass/fail test for given command
 - `z`: Custom fasd cd with fzf
 - `zipup`: exports a clean copy of the current git repo (master) to a zip file
-
-
 
 ### Utility functions
 
