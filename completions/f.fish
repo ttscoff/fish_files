@@ -1,1 +1,1 @@
-complete -c f -f -a '(command ls ~/.marks)'
+complete -c f -F -a '(command ls ~/.marks)'

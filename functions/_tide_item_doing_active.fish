@@ -18,7 +18,7 @@
 #     duration: true
 #     interval_format: dhm
 function _tide_item_doing_active
-	set -l result $DOING_NOW # (doing view tide)
+	set -l result (doing view tide)
 	if test -n "$result"
 		set -l parts (string split "||" "$result")
 		set -l startdate $parts[1]

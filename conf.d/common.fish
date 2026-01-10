@@ -1,14 +1,177 @@
-# adapted from https://gist.github.com/oneohthree/f528c7ae1e701ad990e6
-function slugify
-    echo $argv | LC_ALL=C command iconv -t ascii//TRANSLIT | LC_ALL=C command sed -E 's/[^a-zA-Z0-9\-]+/_/g' | LC_ALL=C command sed -E 's/^(-|_)+|(-|_)+$//g'
+function slugify -d "Slugify a string"
+    if test (count $argv) -eq 0
+        command cat | string lower | stringify_numbers | add_dashes
+    else
+        echo $argv | string lower | stringify_numbers | add_dashes
+    end
 end
 
-# Slugify you can pipe to
-function to_slug
-    command cat | LC_ALL=C command iconv -t ascii//TRANSLIT | LC_ALL=C command sed -E 's/[^a-zA-Z0-9\-]+/-/g' | LC_ALL=C command sed -E 's/^(-|_)+|(-|_)+$//g'
+function unslugify -d "Unslugify a string"
+    if test (count $argv) -eq 0
+        command cat | sed -E 's/[_-]+/ /g' | unstringify_numbers
+    else
+        echo $argv | sed -E 's/[_-]+/ /g' | stringify_numbers
+    end
 end
 
-function shortest_common
+function add_dashes -d "Add dashes between words in a string"
+    if test (count $argv) -eq 0
+        command cat | LC_ALL=C command iconv -t ascii//TRANSLIT | LC_ALL=C command sed -E 's/[^a-zA-Z0-9\-]+/-/g' | LC_ALL=C command sed -E 's/^(-|_)+|(-|_)+$//g'
+    else
+        echo $argv | LC_ALL=C command iconv -t ascii//TRANSLIT | LC_ALL=C command sed -E 's/[^a-zA-Z0-9\-]+/-/g' | LC_ALL=C command sed -E 's/^(-|_)+|(-|_)+$//g'
+    end
+end
+
+function unstringify_numbers -d 'Convert strings like one to 1, twenty one to 21, three-dot-five to 3.5, zero-dot-three-dot-fifty-two to 0.3.52, etc.'
+
+    python3 -c "import word2number" 2>/dev/null
+    if test $status -ne 0
+        if not status --is-interactive; or not set -q argv[1]
+            echo 'Error: Python module "word2number" is required but not installed. Please install it with pip or pipx.' >&2
+            return 1
+        end
+        echo 'The Python module "word2number" is required. Install with pip (1), pipx (2), or skip (3)? [1/2/3]:'
+        read -l _unstringify_choice
+        switch $_unstringify_choice
+            case 1
+                pip install --user word2number
+            case 2
+                pipx install word2number
+            case 3
+                echo 'Skipping install. Function will not work without the module.'
+                return 1
+        end
+    end
+
+    if count $argv >/dev/null
+        python3 -c "
+import sys
+from word2number import w2n
+def convert(arg):
+    try:
+        if '-dot-' in arg:
+            parts = arg.split('-dot-')
+            return '.'.join(str(w2n.word_to_num(p)) for p in parts)
+        else:
+            return str(w2n.word_to_num(arg))
+    except Exception:
+        return arg
+for line in [' '.join(sys.argv[1:])]:
+    tokens = line.split()
+    print(' '.join(convert(token) for token in tokens))
+" $argv
+    else
+        python3 -c "
+import sys
+from word2number import w2n
+def convert(arg):
+    try:
+        if '-dot-' in arg:
+            parts = arg.split('-dot-')
+            return '.'.join(str(w2n.word_to_num(p)) for p in parts)
+        else:
+            return str(w2n.word_to_num(arg))
+    except Exception:
+        return arg
+for line in sys.stdin:
+    tokens = line.strip().split()
+    print(' '.join(convert(token) for token in tokens))
+"
+    end
+end
+
+
+function stringify_numbers -d 'Convert numbers to strings like 1 to one, 21 to twenty one, 3.5 to three-dot-five, 0.3.52 to zero-dot-three-dot-fifty-two, etc.'
+
+    python3 -c "import num2words" 2>/dev/null
+    if test $status -ne 0
+        if not status --is-interactive; or not set -q argv[1]
+            echo 'Error: Python module "num2words" is required but not installed. Please install it with pip or pipx.' >&2
+            return 1
+        end
+        echo 'The Python module "num2words" is required. Install with pip (1), pipx (2), or skip (3)? [1/2/3]:'
+        read -l _stringify_choice
+        switch $_stringify_choice
+            case 1
+                pip install --user num2words
+            case 2
+                pipx install num2words
+            case 3
+                echo 'Skipping install. Function will not work without the module.'
+                return 1
+        end
+    end
+    if count $argv >/dev/null
+        python3 -c "
+import sys
+from num2words import num2words
+def convert(arg):
+    try:
+        if '.' in arg:
+            parts = arg.split('.')
+            return '-dot-'.join(num2words(int(p)) for p in parts)
+        else:
+            return num2words(int(arg))
+    except Exception:
+        return arg
+for line in [' '.join(sys.argv[1:])]:
+    tokens = line.split()
+    print(' '.join(convert(token) for token in tokens))
+" $argv
+    else
+        python3 -c "
+import sys
+from num2words import num2words
+def convert(arg):
+    try:
+        if '.' in arg:
+            parts = arg.split('.')
+            return '-dot-'.join(num2words(int(p)) for p in parts)
+        else:
+            return num2words(int(arg))
+    except Exception:
+        return arg
+for line in sys.stdin:
+    tokens = line.strip().split()
+    print(' '.join(convert(token) for token in tokens))
+"
+    end
+end
+
+function shortest_common -d 'Find shortest common paths that group similar paths together'
+    argparse h/help -- $argv
+    or return 1
+
+    if set -q _flag_help
+        echo "Usage: shortest_common PATH [PATH...]"
+        echo ""
+        echo "Find the shortest common paths that group similar paths together."
+        echo "Paths that share a common prefix are grouped under the first path encountered."
+        echo ""
+        echo "Arguments:"
+        echo "  PATH...            List of paths to process"
+        echo ""
+        echo "Options:"
+        echo "  -h, --help         Show this help message"
+        echo ""
+        echo "Examples:"
+        echo "  shortest_common /home/user/file1 /home/user/file2 /home/other/file3"
+        echo "                     # Returns: /home/user/file1, /home/other/file3"
+        echo "                     # (file2 shares prefix with file1, so it's grouped)"
+        echo ""
+        echo "Notes:"
+        echo "  - The first path is always included in the results"
+        echo "  - Remaining paths are sorted before processing"
+        echo "  - Paths that start with an existing root path are grouped under that root"
+        return 0
+    end
+
+    if test (count $argv) -eq 0
+        echo "Error: shortest_common requires at least one path argument" >&2
+        echo "Use -h or --help for usage information." >&2
+        return 1
+    end
+
     set -l root $argv[1]
     set -l results $argv[1]
     set -e argv[1]
@@ -47,24 +210,6 @@ end
 
 function __by_length -d 'sort piped lines by length'
     command cat | awk '{ print length(), $0 | "sort -n" }' | cut -d" " -f2-
-end
-
-function map
-    set fnc $argv[1]
-    set args $argv[2..-1]
-    if test -z "$args"
-        while read item
-            echo (eval $fnc (string escape $item))
-        end
-    else
-        set -l result
-
-        for item in $args
-            set -a result (eval $fnc (string escape $item))
-        end
-
-        echo -en (string join "\n" $result)
-    end
 end
 
 function remove_empty -d 'removes empty elements from an array'
@@ -122,4 +267,9 @@ function slash_if_dir -d 'Add trailing slash if directory'
     else
         echo -en $argv
     end
+end
+
+function reload_func -d 'Reload a fish function from its source file'
+    functions -e $argv[1]
+    src
 end

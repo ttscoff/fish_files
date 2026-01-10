@@ -1,4 +1,4 @@
-function license --description 'Get license text from GitHub'
+function license -d 'Fetch and display license information from GitHub API.'
     set -l base_url https://api.github.com/licenses
     set -l headers 'Accept: application/vnd.github.drax-preview+json'
 

@@ -1,1 +1,1 @@
-complete -xc bld -a "(howzit -T)"
+complete -F -c bld -a "(howzit -T)"

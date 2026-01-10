@@ -1,15 +1,17 @@
 function er -d 'edit recent file using fasd and fzf'
-	set -l target (fasd -fltR "$argv" | fzf -1 -0 -m --inline-info --height=5 --cycle)
-	if test "$target" != ""
-		istext "$target"
-		if test "$status" -eq 0
-			if test (string match -r '\.md$' $target)
-				mmdc "$target"
-			else
-				subl "$target"
-			end
-		else
-			open "$target"
-		end
-	end
+    set -l target (fasd -fltR "$argv" | fzf -1 -0 -m --inline-info --height=5 --cycle)
+    if test -n "$target"
+        istext "$target"
+        if test "$status" -eq 0
+            if test (string match -r '\.md$' $target)
+                mmdc "$target"
+            else
+                subl "$target"
+            end
+        else
+            open "$target"
+        end
+    else
+        warn "No file found"
+    end
 end

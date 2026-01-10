@@ -25,6 +25,7 @@ function tween -d "Display lines between start and end line numbers"
         echo "  tween -e file.txt 10 20     # Display lines 11 through 19 (exclusive)"
         echo "  tween -b file.txt 10 20     # Use bat for syntax highlighting"
         echo "  tween -b -e file.txt 10 20  # Use bat with exclusive mode"
+        echo "  cat file.txt | tween 10 20  # Pipe input to tween, display lines 10-20"
         return 0
     end
 
@@ -54,11 +55,21 @@ function tween -d "Display lines between start and end line numbers"
         end
     end
 
-    # Validate we have exactly one file path
+
+    set -l use_temp_file 0
+    set -l temp_file
+    # If no file_path, check for piped input (stdin is not a terminal)
     if test -z "$file_path"
-        echo "Error: No file path found. One argument must be a file path." >&2
-        echo "Use -h or --help for usage information." >&2
-        return 1
+        if test ! -t 0
+            set temp_file (mktemp /tmp/tween.XXXXXX)
+            cat >$temp_file
+            set file_path $temp_file
+            set use_temp_file 1
+        else
+            echo "Error: No file path found and no piped input detected." >&2
+            echo "Use -h or --help for usage information." >&2
+            return 1
+        end
     end
 
     # Validate we have 1 or 2 numeric/range arguments
@@ -127,6 +138,9 @@ function tween -d "Display lines between start and end line numbers"
 
     if not test -f "$file_path"
         echo "Error: File '$file_path' does not exist or is not a regular file." >&2
+        if test "$use_temp_file" -eq 1
+            rm -f $file_path
+        end
         return 1
     end
 
@@ -155,6 +169,9 @@ function tween -d "Display lines between start and end line numbers"
         # Check if there are any lines to display in exclusive mode
         if test $exclusive_start -gt $exclusive_end
             # No lines to display (e.g., start=10, end=11 in exclusive mode)
+            if test "$use_temp_file" -eq 1
+                rm -f $file_path
+            end
             return 0
         end
 
@@ -170,5 +187,9 @@ function tween -d "Display lines between start and end line numbers"
         else
             sed -n "$start_line,$end_line p" "$file_path"
         end
+    end
+    # Clean up temp file if used
+    if test "$use_temp_file" -eq 1
+        rm -f $file_path
     end
 end

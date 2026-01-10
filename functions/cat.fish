@@ -1,4 +1,19 @@
 function cat -d "Use appropriate cat replacement for file type"
+    # if calling from another function, use the original cat
+    set -l current_command (string trim (status current-command))
+    if test "$current_command" != cat
+        command cat $argv
+        return 0
+    end
+
+    # if calling from VS Code, Cursor, or Cursor Agent, use the original cat
+    if string match -q "$TERM_PROGRAM" vscode
+        or string match -q "$TERM_PROGRAM" cursor
+        or string match -q "$TERM_PROGRAM" cursor-agent
+        command cat $argv
+        return 0
+    end
+
     for file in $argv
         set -l exts md markdown txt taskpaper mmd mdown mdwn mkdn mkdown
 
@@ -21,6 +36,7 @@ function cat -d "Use appropriate cat replacement for file type"
 
         if is text $file
             if is markown $file || contains (get_ext  $file) $exts
+                warn "Markdown file"
                 mdless $file
             else
                 command bat --style plain $file
@@ -28,7 +44,8 @@ function cat -d "Use appropriate cat replacement for file type"
             continue
         end
 
-        bat -A --style plain $files
+        # bat -A --style plain $files
+        timeout 5 command cat $argv
     end
 
     return 0

@@ -1,3 +1,3 @@
 function cbp -d 'ClipBoard Preview'
-	pbpaste | cat
+    pbpaste
 end

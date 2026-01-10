@@ -1,4 +1,4 @@
-function trim-left --argument str -d 'Trim character left'
+function trim-left --description 'Trim character left' --argument str
     # Ensure the input is not empty
     if test -z "$str"
         echo "Error: No string provided."

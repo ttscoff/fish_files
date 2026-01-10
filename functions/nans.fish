@@ -1,5 +1,6 @@
 function nans -d "Save the accepted answer from StackOverflow as Markdown to nvUltra"
     set -l notebook "/Users/ttscoff/Library/Mobile Documents/9CR7T2DMDG~com~ngocluu~onewriter/Documents/nvALT2.2/"
+    # set -l notebook /Users/ttscoff/Dropbox/Snippets/
 
     argparse h/help a/all -- $argv
     if set -q _flag_help
@@ -17,10 +18,14 @@ function nans -d "Save the accepted answer from StackOverflow as Markdown to nvU
         return 0
     end
 
+    set url (echo "!stackoverflow.com $argv!!" | searchlink)
+
+    echo "URL: $url"
+
     if set -q _flag_all
-        gather --nvu-add --nvu-notebook $notebook (echo "!stackoverflow.com $argv!!" | searchlink)
+        gather --nvu-add --nvu-notebook "$notebook" "$url"
     else
-        gather --nvu-add --nvu-notebook $notebook --accepted-only (echo "!stackoverflow.com $argv!!" | searchlink)
+        gather --nvu-add --nvu-notebook "$notebook" --accepted-only $url
     end
 
 end
