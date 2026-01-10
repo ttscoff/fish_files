@@ -16,48 +16,63 @@ __COMPLETIONS NOTE:__ for the file extension completion function to work, it nee
 
 ## All the functions
 
-
 - `__auto_dir`: n/a
 - `__best_pager`: Choose the best available pager (opinionated)
 - `__complete_extension`: Complete extension with filecomplete.rb
 - `__exec_available`: test if command is available
 - `__expand_path`: commandline function to expand str/str using fasd and fzf
+- `__expand-otherpane`: Insert the other iTerm pane's directory at cursor, or offer completions if multiple
 - `__f_dir_regex`: Construct regex from multiple directory arguments
 - `__fuzzy_cd`: fuzzy cd with jump bookmarks
 - `__human_time`: Humanize a time interval for display
+- `__is_image`: Test if a file is an image
+- `__is_markdown`: Test if a file is a markdown file
 - `__is_text`: Test if a file is plain text
 - `__ls_text_files`: List all text files in current directory
+- `__otherpane_dirs`: List directories of all other iTerm panes in current tab
 - `__prev_token`: Get the previous token on the command line
 - `__re_extension`: remove extension from word under/before cursor
 - `__regex_from_args`: Helper to create greedy regular expression from multiple arguments
 - `__unfuck_previous_command`: Unfuck the previous command
 - `_doing_is_active`: Check if doing is active
 - `_tide_item_doing_active`:
+- `_tide_item_doing_now_tags`:
 - `_tide_item_doing_now`:
 - `_tide_item_message`:
 - `_tide_item_ssh_badge`:
+- `,,,`: cd .. with updown
+- `,,`: cd with updown
 - `64enc`: encode a given image file as base64 and output css background property to clipboard
 - `64font`: encode a given font file as base64 and output css background property to clipboard
 - `64svg`: encode a given svg file as base64 and output css background-image property to clipboard
+- `abbr-add`:
+- `abbr-erase`:
 - `abbrs`: Search abbreviations
 - `ack`: ack defaults, ~/.ackrc for more
 - `acorn`: Open Acorn.app with optional file(completion available)
 - `add_user_path`: Shortcut to add a user path
+- `add-abbr`: add abbr to custom abbr file
 - `affd`: Open Affinity Designer with optional file (completion available)
 - `afff`: Open Affinity Photo with optional file (completion available)
 - `ag`: Silver Surfer defaults, smart case, ignore VCS
 - `alpha`: Open ImageAlpha with optional file (completion available)
 - `ans`: Get the accepted or all answers from StackOverflow as Markdown
+- `ask`: Send a prompt to cursor-agent and print the response.
 - `ax`: Make file executable
 - `b`: Run a binstub from the current project with bundler
+- `backup`:
 - `badge`: Set iTerm session badge
 - `bak`: Back up a file by moving or copying to FILE.bak
 - `be`: Run a command in the context of the current bundle
 - `bid`: Get bundle id for app name
+- `binary`: Convert a number to binary using bc.
 - `bld`: Run howzit build system
 - `box`: Draw a box around text.
 - `browser`: Write output to a temp HTML file and open in default browser
+- `c.`: Run Cursor in a directory
 - `c`: n/a
+- `ca`: Send a prompt to cursor-agent, print the response, and play a sound.
+- `cac`: Run a cursor-agent command from a command file
 - `calc`: CLI calculator
 - `capitalize`: Capitalize the first letter of a given text
 - `cat`: Use appropriate cat replacement for file type
@@ -72,7 +87,10 @@ __COMPLETIONS NOTE:__ for the file extension completion function to work, it nee
 - `chrome`: Open Google Chrome with optional file (completion available)
 - `cl`: copy output of last command to clipboard
 - `clean-unzip`: Unzip a zipfile to a clean folder
+- `clip-pwd`:
 - `clip`: Copy file to clipboard
+- `clone-cd`:
+- `clone-shallow-cd`:
 - `code`: n/a
 - `codep`: Open a VS Code project (completion available)
 - `coln`: Column N
@@ -85,7 +103,10 @@ __COMPLETIONS NOTE:__ for the file extension completion function to work, it nee
 - `cpu`: Show CPU usage
 - `cpwd`: Copy the current directory path to the clipboard
 - `cr`: Open CodeRunner
+- `create-file`:
 - `crush`: pngcrush
+- `curdir`: Print the current directory name.
+- `curs`: Show or hide the terminal cursor
 - `cursor`: n/a
 - `dadjoke`: Get a dad joke from icanhazdadjoke.com
 - `dash`: Open argument in Dash
@@ -104,19 +125,27 @@ __COMPLETIONS NOTE:__ for the file extension completion function to work, it nee
 - `docx2mmd`: Convert docx to markdown: docx2mmd [source] [target]
 - `doing_active`: Check if doing is active and add tide item
 - `doing_now`: Get the current doing now for tide
+- `domain`:
 - `dpl`: alias dpl=howzit -r deploy
 - `dpld`: howzit -r --default deploy
 - `dpln`: howzit -r --no deploy
 - `dply`: howzit -r --yes deploy
+- `drop`: Drop the last n lines from stdin
+- `dtoh`:
 - `eat`: Move files from a directory to the current directory
 - `echo-variable`: Echo the value of a variable, uppercased if needed
 - `edit-git`: Edit the first file changed in the current git branch
 - `edit-gitconfig`: Edit the git config file for the current repo
+- `edit-readme`: Open the README file in the project root with $EDITOR.
 - `eds`: Shortcut for editscript
 - `ensure-trailing-newline`: Ensure a file ends with a newline
+- `equals`:
 - `er`: edit recent file using fasd and fzf
+- `error`:
 - `esc`: Ruby cgi escape
 - `eschtml`: Ruby cgi HTML escape
+- `expand_otherdir`: n/a
+- `expand-home-tilde`:
 - `extract`: unarchive any file type
 - `f`: Open directory in Finder with jump shortcuts
 - `fallback`: allow a fallback value for variable
@@ -125,12 +154,16 @@ __COMPLETIONS NOTE:__ for the file extension completion function to work, it nee
 - `ffdir`: fuzzy find a directory, pass root dir and sequential search strings
 - `fffile`: fuzzy find a file, pass root dir and sequential search strings
 - `ffmark`: fuzzy find a jump mark
+- `file-committed-in-git`:
+- `file-exists`:
 - `filetype`: Returns the kMDItemContentTypeTree for a file
 - `findgist`: select gist from list and display contents
 - `findgistid`: select gist from list and display contents
+- `fingerprint`:
 - `finish`: Finish last unfinished doing task by search
 - `fire`: Open Firefox with optional file (completion available)
 - `fix`: Fix up last command with search/replace
+- `flow`: Initialize git flow in the current repository.
 - `flush`: Flush DNS cache
 - `fo`: Open file using jump shortcuts and fuzzy matching
 - `fp`: Find and list processes matching a case-insensitive fuzzy-match string
@@ -146,21 +179,26 @@ __COMPLETIONS NOTE:__ for the file extension completion function to work, it nee
 - `geminstall`: install a gem with fuzzy search
 - `gemuninstall`: Uninstall a gem with partial name matching
 - `get_ext`: Get the file extension from the argument
+- `get-line`: Get a single line or line range from a text file
 - `get`: alias get=git clone
 - `getignore`: Get ignore file from gitignore.io and save to .gitignore
 - `getignores`: Pull gitignore.io list of available .gitignore files
 - `gg`: Commit pending changes and quote all args as message
 - `gi`: gitignore.io cli for fish
+- `git-add`:
 - `git-changing-files`: List all files that have changed in the current git repository
+- `git-commit`:
 - `git-protocol-https-to-git`: Change git remote protocol from https to git
 - `git-restage`: Restage all changes in the current git repository
 - `git-restore`: Restore files in the working tree from the index or another tree
 - `gitar`: Automatically add new and remove deleted files from the git index
 - `gitrelease`: Create a git release using hub
 - `gmine`: Resolve git conflicts with mine
+- `goto-definition`:
 - `gsearch`: Grep git commit history
 - `gt`: n/a
 - `gtheirs`: Resolve git conflicts with theirs
+- `gtop`: jump to top level of git repo
 - `h`: howdoi shortcut
 - `halp`: Get help for any builtin, alias, or function
 - `hi`: Import history
@@ -174,24 +212,36 @@ __COMPLETIONS NOTE:__ for the file extension completion function to work, it nee
 - `idletil`: Wait until system idle time has reached X seconds and optionally execute command (requires beengone)
 - `imdown`: Test for internet connection and notify when it comes up
 - `imgsize`: Quickly get image dimensions from the command line
+- `in-git-repo`:
 - `index_of`: return the 1-based index of the first argument in remaining arguments
 - `insert_aligned`: Replace a portion of a string with another string with alignment
 - `insert`: Insert a string in another string at start position
+- `install_cursor_commands`: Install Cursor command files from dotfiles to .cursor/commands, with optional filtering.
+- `install_prompts`:
+- `install_vscode_prompts`: Install VS Code prompt files from dotfiles to .github/prompts, with optional filtering.
+- `ip-addr`:
 - `ip`: Get external IP address
 - `ips`: Display all ip addresses for this host
 - `is-clean-zip`: Check if a zipfile is clean
+- `is-dir`:
+- `is-symlink`:
 - `is`: test if given file is of a file type. is TYPE FILE
+- `isimage`: test if given file is plain text
 - `isodate`: Return the current date in ISO 8601 format
 - `isodatetime`: Return the current date and time in ISO 8601 format
 - `istext`: test if given file is plain text
 - `jfind`: jtag: search for tags
 - `jothers`: jtag: List tags of other posts containing (all) tags
+- `js`: lint with jslint
 - `jump_fasd`: n/a
 - `jump`: Fish "jump" replacement with subdirectory matching
 - `last_history_item`: Return the last item from command history
+- `last-col`:
+- `last-download`:
+- `last-function-name`: Return the last function name from command history
 - `lb`: Select file in LaunchBar, fall back to the current directory
 - `lbash`: launch bash login shell
-- `license`: Get license text from GitHub
+- `license`: Fetch and display license information from GitHub API.
 - `line-count`: Count lines in a file
 - `lld`: n/a
 - `lno`: Print file with line numbers
@@ -204,17 +254,23 @@ __COMPLETIONS NOTE:__ for the file extension completion function to work, it nee
 - `ltr`: List directory from newest to oldest
 - `m.`: Check if the current directory is bookmarked
 - `mack`: ack for markdown
+- `map`: map a function over a list of items.
 - `md`: Test if current directory is bookmarked
 - `mdgrep`: ripgrep for markdown
 - `mem`: Show memory usage
+- `mkdir-cd`:
 - `mkdir`: mkdir with subdirs, option to cd after creating
+- `mkusertemp`: Make a user-specific tmpdir in your home directory like Daniel Bernstein warned us about
 - `mmdc`: Open MultiMarkdown Composer 5 with optional file (completion available)
+- `move-last-download`:
 - `move`: move files and directories
+- `n`: Gather url to nvultra
 - `nans`: Save the accepted answer from StackOverflow as Markdown to nvUltra
 - `nman`: Open man pages in a new terminal window
 - `nope`: echo "nope"
 - `o`: Shortcut to open an app from the command line
 - `optim`: Open ImageOptim with optional file (completion available)
+- `otherdir`: Get directory of first other iTerm tab
 - `pbgist`: private gist from clipboard
 - `pbgistp`: gist from clipboard
 - `pbp`: Pasteboard Preview
@@ -224,10 +280,12 @@ __COMPLETIONS NOTE:__ for the file extension completion function to work, it nee
 - `pg`: Case insensitive search for process
 - `pless`: cat a file with pygments highlighting
 - `pman`: Display a man page as a PostScript PDF in Preview.app
+- `port-ps`: Show processes using the specified port.
 - `prev`: Open Preview with optional file (completion available)
 - `preview`: Preview text files using fzf and bat
 - `prioritize`: set a numeric prefix on a file for sorting
 - `prompt_message`: Set the prompt message
+- `ps-ports`:
 - `r`: Run Reiki via bash
 - `raise`: Like ruby raise, but for fish
 - `random-file`: Select a random file from the current directory
@@ -236,7 +294,10 @@ __COMPLETIONS NOTE:__ for the file extension completion function to work, it nee
 - `remove`: Remove files and directories, but only if they are git repositories
 - `rename-pwd`: Rename the current directory to new_name
 - `repeat`: Repeat the given command indefinitely with a pause
+- `repo-from-url`:
+- `restore`:
 - `retry`: Retry a command until it succeeds
+- `row`: Print the specified line number from input.
 - `rule`: Print a horizontal rule with optional message
 - `send`: Send to other iTerm pane
 - `serve`: Start a local server for the current directory, open in browser
@@ -248,41 +309,61 @@ __COMPLETIONS NOTE:__ for the file extension completion function to work, it nee
 - `shorten`: Truncate every line of input to specified width
 - `shortest`: Return the shortest string in array
 - `showalias`: Show an alias
+- `shutdown`:
 - `sign`: Sign a macOS app with Developer ID Application
+- `skip`: skip <n>: Skip the first n lines of stdin
 - `skylight`: alias skylight=skylighting -n -t ~/styles/kde/breeze-dark.theme
+- `sl`: Run searchlink with a query
 - `spell`: Get spelling options from aspell
 - `spellcheck`: Check all Markdown files in git repo (recursive)
 - `spellf`: Get first spelling option from aspell
 - `src`: reload config file
+- `startswith`:
 - `stretch`: Stretch and Clean URL (requires Stretch and Clean URL Shortcut)
+- `string-empty`:
 - `sublp`: Open a VS Code project (completion available)
 - `sum`: Take a list of numbers and return the sum
 - `symlink`: Create a symlink from _from to _to, makes paths absolute
+- `symlinks`:
+- `sync-repo`:
+- `sync-repos`:
+- `synrepo`: Create a new bare git repository on syn
+- `take`: Print the first N lines of input.
+- `tar-cd`:
 - `td`: [Create and] open project todo
+- `tgz`:
 - `title-case`: Convert a string to title case
 - `tmj`: For use with my tmux utility (bash_scripts/tm)
 - `todos`: Search for TODOs and FIXMEs in the current directory
 - `tower`: Open Tower for directory (default CWD)
 - `tp`: Open TaskPaper with optional file (completion available)
+- `tree`:
 - `trim-left`: Trim character left
 - `trim-right`: Trim character right
 - `trim-scheme`: Trim the scheme from a URL
 - `trim-trailing-slash`: Trim trailing slashes from a string
 - `tunnel`: Create a tunnel to a host and port
 - `tween`: Display lines between start and end line numbers
+- `uid`:
 - `unbak`: remove bak extension
 - `uncolor`: Remove color codes from string
 - `unesc`: Ruby cgi unescape
 - `unexpand-home-tilde`: Change $HOME to ~
+- `unsymlink`:
+- `until-char`:
+- `unzip-cd`:
 - `up`: cd to a parent folder with fuzzy matching
+- `update_prompts`: Update prompt and command files in .github/prompts and .cursor/commands from dotfiles.
 - `updown`: cd to a directory and then fuzzy search its tree
+- `url-size`: Print the human readable size of a URL.
 - `urldec`: URL decode
 - `urlenc`: url encode the passed string
 - `v`: vim via fasd and fzf
 - `verify`: alias verify=codesign --deep -vv --verify
+- `vim_edit`:
 - `vimver`: Open the version file of the current gem in vim
 - `warn`: Echo log message to STDERR
-- `watchdns`: n/a
+- `watchdns`:
 - `watchthis`: Watch for changes in the current directory and execute command
 - `whatsonport`: find out what PID is running on a port (requires password)
 - `wifi-network-name`: Get the name of the current wifi network
@@ -290,6 +371,7 @@ __COMPLETIONS NOTE:__ for the file extension completion function to work, it nee
 - `wifi-reset`: Reset the Wi-Fi connection
 - `word-count`: Count the number of words in a string (piped)
 - `xc`: Open Xcode with optional file (completion available)
+- `xman`:
 - `yep`: echo "yep"
 - `yn`: Simple pass/fail test for given command
 - `z`: Custom fasd cd with fzf
@@ -297,21 +379,25 @@ __COMPLETIONS NOTE:__ for the file extension completion function to work, it nee
 
 ### Utility functions
 
-- `__by_length`:
+- `__by_length`: sort piped lines by length
 - `__ff_dir_regex`:
 - `__ff_dir_to_regex`:
 - `__should_na`:
-- `__sort_by_length`:
+- `__sort_by_length`: sort lines by length, lines passed as arguments
+- `add_dashes`: Add dashes between words in a string
 - `append_slash`: append a slash to each line/argument if needed
-- `map`:
+- `reload_func`: Reload a fish function from its source file
 - `remove_empty`: removes empty elements from an array
 - `return_array`: Echo out an array one line at a time
 - `shorten_home`: substitutes $HOME with ~
-- `shortest_common`:
+- `shortest_common`: Find shortest common paths that group similar paths together
 - `slash_if_dir`: Add trailing slash if directory
-- `slugify`:
-- `to_slug`:
+- `slugify`: Slugify a string
+- `stringify_numbers`: Convert numbers to strings like 1 to one, 21 to twenty one, 3.5 to three-dot-five, 0.3.52 to zero-dot-three-dot-fifty-two, etc.
 - `trim_pwd`: removes the current working directory from an array of paths
+- `unslugify`: Unslugify a string
+- `unstringify_numbers`: Convert strings like one to 1, twenty one to 21, three-dot-five to 3.5, zero-dot-three-dot-fifty-two to 0.3.52, etc.
+
 
 I'll update these every once in a while. If you're digging through and spot a problem, a stupid mistake, or something that could just plain be done better, please add an issue and let me know!
 
