@@ -1,3 +1,4 @@
+# requires: is, get_ext, warn, mdless
 function cat -d "Use appropriate cat replacement for file type"
     # if calling from another function, use the original cat
     set -l current_command (string trim (status current-command))

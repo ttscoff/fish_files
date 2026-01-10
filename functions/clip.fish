@@ -1,7 +1,8 @@
+# requires: is
 function clip --description 'Copy file to clipboard'
     set -l concat
-	for f in $argv
-        is text "$f" 2> /dev/null
+    for f in $argv
+        is text "$f" 2>/dev/null
         if test $status -eq 0
             set concat $concat $f
             echo "Adding $f to clipboard."
@@ -12,7 +13,6 @@ function clip --description 'Copy file to clipboard'
 
     if [ "$concat" != "" ]
         command cat $concat | pbcopy
-        echo "Copied"
+        echo Copied
     end
 end
-

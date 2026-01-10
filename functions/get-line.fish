@@ -1,3 +1,4 @@
+# requires: is
 function get-line -d 'Get a single line or line range from a text file'
     # Check if the user has provided the correct number of arguments
     # If the user has provided 3 arguments, set start, end, and file

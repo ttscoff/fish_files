@@ -1,3 +1,4 @@
+## requires: file-exists
 function edit-readme -d 'Open the README file in the project root with $EDITOR.'
     set root (git root)
     for file in $root/README.md $root/README

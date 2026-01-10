@@ -1,3 +1,4 @@
+## requires: __f_dir_regex, shortest
 function ffdir -d "fuzzy find a directory, pass root dir and sequential search strings"
 	set -l options "c/case-sensitive" "i/case-insensitive" "m/menu" "multi" "d/depth=" "shortest"
 	argparse $options -- $argv

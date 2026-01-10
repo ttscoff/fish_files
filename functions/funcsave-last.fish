@@ -1,3 +1,4 @@
+## requires: last-function-name, funcsave
 function funcsave-last --description 'Save last function'
     # Check if the last-function-name command is available
     if not type -q last-function-name

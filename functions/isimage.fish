@@ -1,3 +1,4 @@
+# requires: is
 function isimage --description 'test if given file is plain text'
 
     if is image "$argv"

@@ -1,3 +1,4 @@
+# requires: is, get_ext
 function __is_markdown -d "Test if a file is a markdown file"
     set -l exts md mmd markdown mdwn mkd mkdn mkdown mdown
     set -l ext (get_ext $argv[-1])
