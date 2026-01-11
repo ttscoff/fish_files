@@ -51,6 +51,9 @@ function tween -d "Display lines between start and end line numbers or string ma
                 return 1
             end
             set file_path -
+        else if string match -q -- '--*' "$arg"; or string match -qr '^-[a-zA-Z]+' -- "$arg"
+            # Skip flags (e.g. -b, --bat), but not negative numbers like -20 or lone '-'
+            continue
         else if test -f "$arg"
             if test -n "$file_path"
                 echo "Error: Multiple file paths detected: '$file_path' and '$arg'" >&2
