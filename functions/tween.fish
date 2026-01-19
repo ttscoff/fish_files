@@ -1,7 +1,7 @@
 
 
 function tween -d "Display lines between start and end line numbers or string matches"
-    argparse e/exclusive b/bat h/help r/regex -- $argv
+    argparse -i e/exclusive b/bat h/help r/regex -- $argv
     or return 1
 
     if set -q _flag_help
@@ -17,12 +17,16 @@ function tween -d "Display lines between start and end line numbers or string ma
         echo ""
         echo "Arguments (can be in any order):"
         echo "  FILE              Path to the file to read"
+        echo "  START             Single line number: from START to end of file"
         echo "  START, END        Line numbers (can use +N or -N for offsets)"
+        echo "                    -1 = end of file (last line)"
+        echo "                    -N (N>1) = N lines from the end"
         echo "  STRING            Quoted string to match line (inclusive)"
         echo "  /REGEX/           Regex pattern to match line (inclusive)"
         echo "  Multiple ranges   Separate multiple ranges with commas (e.g., 5-10,15-20 or 5 10, 15 20, 'START' +20)"
         echo ""
         echo "Examples:"
+        echo "  tween file.txt 10                   # Display lines 10 to end of file"
         echo "  tween file.txt 10 20                # Display lines 10 through 20 (inclusive)"
         echo "  tween 10 20 file.txt                # Same as above, arguments in any order"
         echo "  tween file.txt 10-20                # Using dashed range"
@@ -30,7 +34,8 @@ function tween -d "Display lines between start and end line numbers or string ma
         echo "  tween file.txt 10-20,30-40          # Multiple ranges, dashed format"
         echo "  tween file.txt 10 20, 30 40         # Multiple ranges, space format"
         echo "  tween file.txt 10 +20               # Lines 10 through 30"
-        echo "  tween file.txt 50 -10               # Lines 50 to 10 from end"
+        echo "  tween file.txt 50 -1                # Lines 50 to end of file"
+        echo "  tween file.txt 50 -10                # Lines 50 to 10 lines from end"
         echo "  tween file.txt 'START' +20          # Line matching 'START' plus 20 lines"
         echo "  tween file.txt 50-'END'             # Lines 50 to line matching 'END'"
         echo "  tween file.txt /START/ +20          # Regex match for 'START' plus 20 lines"
@@ -69,7 +74,8 @@ function tween -d "Display lines between start and end line numbers or string ma
     # Join all non-file args into a single string, then split by comma for ranges
     set -l range_args
     if test (count $arglist) -gt 0
-        set range_args (string join " " $arglist | string split ",")
+        # Use `--` so values like -10 are treated as arguments, not options
+        set range_args (string join " " -- $arglist | string split ",")
     end
 
 
@@ -163,10 +169,15 @@ function tween -d "Display lines between start and end line numbers or string ma
 
         # End line
         if test -z "$e"
-            set end_line $start_line
+            # Single argument: from start to end of file
+            set end_line $total_lines
         else if string match -qr '^\+\d+$' -- $e
             set end_line (math $start_line + (string sub --start 2 $e))
+        else if test "$e" = "-1"
+            # -1 means end of file (last line)
+            set end_line $total_lines
         else if string match -qr '^-\d+$' -- $e
+            # -2, -3, etc. mean N lines from the end
             set end_line (math $total_lines - (string sub --start 2 $e) + 1)
         else if string match -qr '^\d+$' -- $e
             set end_line $e
