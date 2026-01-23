@@ -1,17 +1,18 @@
 
 
 function tween -d "Display lines between start and end line numbers or string matches"
-    argparse -i e/exclusive b/bat h/help r/regex -- $argv
+    argparse -i e/exclusive b/bat h/help r/regex n/line-no -- $argv
     or return 1
 
     if set -q _flag_help
-        echo "Usage: tween [-e|--exclusive] [-b|--bat] [-r|--regex] [-h|--help] FILE RANGE[,RANGE...]"
-        echo "   or: tween [-e|--exclusive] [-b|--bat] [-r|--regex] [-h|--help] FILE START END[,RANGE...]"
-        echo "   or: tween [-e|--exclusive] [-b|--bat] [-r|--regex] [-h|--help] FILE START-END[,RANGE...]"
+        echo "Usage: tween [-e|--exclusive] [-b|--bat] [-n|--line-no] [-r|--regex] [-h|--help] FILE RANGE[,RANGE...]"
+        echo "   or: tween [-e|--exclusive] [-b|--bat] [-n|--line-no] [-r|--regex] [-h|--help] FILE START END[,RANGE...]"
+        echo "   or: tween [-e|--exclusive] [-b|--bat] [-n|--line-no] [-r|--regex] [-h|--help] FILE START-END[,RANGE...]"
         echo ""
         echo "Options:"
         echo "  -e, --exclusive   Exclude the start and end lines from output"
         echo "  -b, --bat         Use bat instead of sed for syntax highlighting"
+        echo "  -n, --line-no     Display line numbers (right-aligned, padded)"
         echo "  -r, --regex       Treat all string arguments as regular expressions"
         echo "  -h, --help        Show this help message"
         echo ""
@@ -135,6 +136,10 @@ function tween -d "Display lines between start and end line numbers or string ma
 
     set -l total_lines (wc -l < "$file_path" | string trim)
 
+    # Parse all ranges first and store them
+    set -l parsed_ranges
+    set -l max_line_num 0
+    
     for range in $range_args
         set -l start_line
         set -l end_line
@@ -215,22 +220,59 @@ function tween -d "Display lines between start and end line numbers or string ma
         end
 
         # Handle exclusive mode
+        set -l actual_start
+        set -l actual_end
         if set -q _flag_exclusive
-            set -l exclusive_start (math $start_line + 1)
-            set -l exclusive_end (math $end_line - 1)
-            if test $exclusive_start -gt $exclusive_end
+            set actual_start (math $start_line + 1)
+            set actual_end (math $end_line - 1)
+            if test $actual_start -gt $actual_end
                 continue
             end
-            if set -q _flag_bat
-                bat --line-range "$exclusive_start:$exclusive_end" "$file_path"
-            else
-                sed -n "$exclusive_start,$exclusive_end p" "$file_path"
-            end
         else
+            set actual_start $start_line
+            set actual_end $end_line
+        end
+
+        # Track maximum line number for padding calculation
+        if test $actual_end -gt $max_line_num
+            set max_line_num $actual_end
+        end
+
+        # Store parsed range
+        set -a parsed_ranges "$actual_start|$actual_end"
+    end
+
+    # Calculate padding width based on max line number
+    set -l padding_width
+    if set -q _flag_line_no
+        if test $max_line_num -gt 0
+            set padding_width (string length "$max_line_num")
+        else
+            set padding_width (string length "$total_lines")
+        end
+    end
+
+    # Output all parsed ranges
+    for range_pair in $parsed_ranges
+        set -l parts (string split "|" "$range_pair")
+        set -l actual_start $parts[1]
+        set -l actual_end $parts[2]
+
+        # Output with or without line numbers
+        if set -q _flag_line_no
+            # Use sed to get lines, then awk to add formatted line numbers
+            sed -n "$actual_start,$actual_end p" "$file_path" | awk -v start=$actual_start -v width=$padding_width '
+                {
+                    line_num = start + NR - 1
+                    printf "%*d: %s\n", width, line_num, $0
+                }
+            '
+        else
+            # Normal output (with or without bat)
             if set -q _flag_bat
-                bat --line-range "$start_line:$end_line" "$file_path"
+                bat --line-range "$actual_start:$actual_end" "$file_path"
             else
-                sed -n "$start_line,$end_line p" "$file_path"
+                sed -n "$actual_start,$actual_end p" "$file_path"
             end
         end
     end
