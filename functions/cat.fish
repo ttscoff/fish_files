@@ -25,7 +25,7 @@ function cat -d "Use appropriate cat replacement for file type"
 
         if is image $file || is pdf $file
             # Use the `imgcat` command to display images in the terminal
-            imgcat $file
+            imgcat -r -W 50 $file
             continue
         end
 
@@ -38,9 +38,23 @@ function cat -d "Use appropriate cat replacement for file type"
         if is text $file
             if is markown $file || contains (get_ext  $file) $exts
                 warn "Markdown file"
-                mdless $file
+                if type -q apex
+                    apex --to terminal256 $file
+                else if type -q mdless
+                    mdless $file
+                else if type -q glow
+                    glow $file
+                else if type -q bat
+                    command bat --style plain $file
+                else
+                    command cat $file
+                end
             else
-                command bat --style plain $file
+                if type -q bat
+                    command bat --style plain $file
+                else
+                    command cat $file
+                end
             end
             continue
         end

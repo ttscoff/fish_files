@@ -1,13 +1,24 @@
-
-
 function c. --description 'Run Cursor in a directory'
     set query $argv[1]
-    # Skip matching if no argument or if argument is a directory
-    if test -z "$query"; or test -d "$query"
-        cursor (fallback $argv .)
+
+    # If no argument, use current directory
+    if test -z "$query"
+        set wsfiles *.code-workspace
+        if test -e "$wsfiles[1]"
+            cursor $wsfiles[1]
+        else
+            cursor .
+        end
         return
     end
 
+    # If argument is an existing directory, use it
+    if test -d "$query"
+        cursor "$query"
+        return
+    end
+
+    # Try to match command
     set -l files ./.cursor/commands/*.md
     set -l match ""
     set -l matchlen 99999
@@ -25,8 +36,10 @@ function c. --description 'Run Cursor in a directory'
 
     if test -n "$match"
         echo (set_color green)"Match found: "(set_color brwhite)$match(set_color normal)
-        agent --approve-mcps --output-format text --print .cursor/commands/$match.md
+        agent --approve-mcps --trust --output-format text --print "Read .cursor/commands/$match.md and follow its instructions."
+        return 0
     else
-        cursor (fallback $argv .)
+        warn -e "Directory or command not found"
+        return 1
     end
 end

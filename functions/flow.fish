@@ -1,5 +1,5 @@
 function flow -d 'Initialize git flow in the current repository.'
-    if test (git origin &>/dev/null || false)
+    if not test -f .git
         git init
     end
 
