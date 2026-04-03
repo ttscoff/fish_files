@@ -4,7 +4,7 @@
 #
 # Requires spark plugin for sparkline support
 # fisher install jorgebucaran/spark.fish
-function speed
+function speed -d 'Run a speed test and log results to ~/logs/speed.csv. Use --sparkline N to show a sparkline of the last N results. Use --type to specify which speeds to show (upload, download, or both).' --no-scope-shadowing
     argparse 's/sparkline=' 't/type=' -- $argv
     or return 1
 
